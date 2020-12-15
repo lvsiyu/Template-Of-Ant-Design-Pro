@@ -7,7 +7,7 @@
  */
 export default {
   '/api': {
-    target: 'http://172.16.8.82:8088/',
+    target: 'http://xxx.xxx.xxx:xxx' /* 你的项目真实接口地址 */,
     changeOrigin: true,
     pathRewrite: { '^/api': '' },
   },

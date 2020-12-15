@@ -5,7 +5,7 @@ const proSettings = {
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
-  title: '市域管控平台',
+  title: '后台管理模板',
   pwa: false,
   iconfontUrl: '',
   headerRender: false,

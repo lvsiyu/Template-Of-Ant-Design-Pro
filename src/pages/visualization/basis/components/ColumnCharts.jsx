@@ -16,7 +16,7 @@ const ColumnCharts = (props) => {
   const config = {
     data: columnData,
     xField: 'type',
-    yField: 'value',
+    yField: 'sales',
     label: {
       position: 'middle',
       style: {

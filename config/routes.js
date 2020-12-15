@@ -28,17 +28,17 @@ export default [
                 redirect: '/visualization/basis',
               },
               {
-                name: '市域可视化',
+                name: '基本展示',
                 icon: 'LineChartOutlined',
                 path: '/visualization',
                 routes: [
                   {
-                    name: '市域基本信息',
+                    name: '多种统计图',
                     path: '/visualization/basis',
                     component: './visualization/basis',
                   },
                   {
-                    name: '重点人员管控',
+                    name: '单表格仅观看',
                     path: '/visualization/personnel',
                     component: './visualization/personnel',
                   },

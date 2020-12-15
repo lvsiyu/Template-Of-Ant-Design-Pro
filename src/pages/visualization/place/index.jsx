@@ -9,13 +9,13 @@ const Place = () => {
   const columns = [
     {
       title: '单位名称',
-      dataIndex: 'dwmc',
+      dataIndex: 'name',
       valueType: 'input',
       ellipsis: true,
     },
     {
       title: '单位类型',
-      dataIndex: 'dwlx',
+      dataIndex: 'type',
       search: false,
       ellipsis: true,
     },

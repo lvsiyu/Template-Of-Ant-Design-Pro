@@ -1,15 +1,15 @@
 import request from '@/utils/request';
 
 export async function queryLine() {
-  return request('/api/biz/syjbxx/getLineData');
+  return request('/mock/lineData');
 }
 
 export async function queryColumn() {
-  return request('/api/biz/syjbxx/getPieData');
+  return request('/mock/columnData');
 }
 
 export async function queryPie() {
-  return request('/api/biz/syjbxx/getPieData');
+  return request('/mock/pieData');
 }
 
 export async function queryBar() {
