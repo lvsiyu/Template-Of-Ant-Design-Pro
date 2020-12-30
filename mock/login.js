@@ -1,7 +1,7 @@
 export default {
   'POST /mock/login': {
     code: 1,
-    data: '1111111',
+    data: { userRoles: 'admin', userToken: '111111' },
     msg: 'success',
   },
 };

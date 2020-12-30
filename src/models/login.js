@@ -20,7 +20,8 @@ const Model = {
 
       if (response.code === 1) {
         message.success('🎉 🎉 🎉  登录成功！即将跳转页面');
-        sessionStorage.setItem('userToken', response.data);
+        sessionStorage.setItem('userToken', response.data.userToken);
+        sessionStorage.setItem('userRoles', response.data.userRoles);
         setTimeout(() => {
           window.location.href = '/';
         }, 2000);

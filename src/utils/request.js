@@ -57,12 +57,12 @@ const request = extend({
 
 /* 添加拦截器，校验是否有token，如果有代入进去 */
 request.interceptors.request.use(async (url, options) => {
-  const c_token = sessionStorage.getItem('userToken');
-  if (c_token) {
+  const cToken = sessionStorage.getItem('userToken');
+  if (cToken) {
     const headers = {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      token: c_token,
+      token: cToken,
     };
     return {
       url,

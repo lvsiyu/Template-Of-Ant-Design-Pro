@@ -1,3 +1,5 @@
+import { history } from 'umi';
+import { stringify } from 'querystring';
 import { queryCurrent, query as queryUsers } from '@/services/user';
 
 const UserModel = {
@@ -15,13 +17,25 @@ const UserModel = {
     },
 
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
-      yield put({
-        type: 'saveCurrentUser',
-        payload: response,
-      });
-      if (response.code === 1) {
-        sessionStorage.setItem('userRoles', response.data.userRole);
+      const isLogin = sessionStorage.getItem('userRoles');
+      if (isLogin) {
+        const response = yield call(queryCurrent);
+        yield put({
+          type: 'saveCurrentUser',
+          payload: response,
+        });
+        if (response.code === 1) {
+          sessionStorage.setItem('userRoles', response.data.userRole);
+        }
+      }
+
+      if (!isLogin) {
+        history.replace({
+          pathname: '/user/login',
+          search: stringify({
+            redirect: window.location.href,
+          }),
+        });
       }
     },
   },
