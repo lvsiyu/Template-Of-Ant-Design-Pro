@@ -2,6 +2,7 @@ import { getMenuData, getPageTitle } from '@ant-design/pro-layout';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { Link, connect } from 'umi';
 import React from 'react';
+import PropTypes from 'prop-types';
 import logo from '../assets/logo.svg';
 import styles from './UserLayout.less';
 
@@ -50,3 +51,9 @@ const UserLayout = (props) => {
 };
 
 export default connect(({ settings }) => ({ ...settings }))(UserLayout);
+
+UserLayout.propTypes = {
+  route: PropTypes.any.isRequired,
+  children: PropTypes.any.isRequired,
+  location: PropTypes.any.isRequired,
+};

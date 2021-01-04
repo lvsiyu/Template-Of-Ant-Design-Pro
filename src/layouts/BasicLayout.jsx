@@ -5,6 +5,7 @@
  */
 import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
 import React, { useEffect, useMemo, useRef } from 'react';
+import PropTypes from 'prop-types';
 import { Link, connect, history } from 'umi';
 import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
@@ -43,7 +44,7 @@ const defaultFooterDom = (
     links={[
       {
         key: '1',
-        title: '技术支持: 昆明世科计算机网络有限公司',
+        title: '技术支持: xxxxxxxx有限公司',
       },
     ]}
   />
@@ -58,6 +59,7 @@ const BasicLayout = (props) => {
       pathname: '/',
     },
   } = props;
+
   const menuDataRef = useRef([]);
   useEffect(() => {
     if (dispatch) {
@@ -134,3 +136,10 @@ export default connect(({ global, settings }) => ({
   collapsed: global.collapsed,
   settings,
 }))(BasicLayout);
+
+BasicLayout.propTypes = {
+  dispatch: PropTypes.any.isRequired,
+  children: PropTypes.any.isRequired,
+  settings: PropTypes.any.isRequired,
+  location: PropTypes.any.isRequired,
+};

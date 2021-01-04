@@ -48,6 +48,31 @@ export default [
                 ],
               },
               {
+                name: '地图可视化',
+                icon: 'DribbbleOutlined',
+                path: '/map',
+                routes: [
+                  {
+                    name: '基础地图',
+                    path: '/map/basis',
+                    component: './map/basis',
+                  },
+                  {
+                    name: '弹框地图',
+                    path: '/map/modals',
+                    component: './map/modals',
+                  },
+                  {
+                    name: '交互地图',
+                    path: '/map/action',
+                    component: './map/action',
+                  },
+                  {
+                    component: './404',
+                  },
+                ],
+              },
+              {
                 component: './404',
               },
             ],
