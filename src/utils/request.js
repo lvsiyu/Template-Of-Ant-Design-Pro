@@ -75,4 +75,31 @@ request.interceptors.request.use(async (url, options) => {
   };
 });
 
+/* 添加拦截器，监听是否是blob大文件下载，如果是，自动转码下载文件 */
+request.interceptors.response.use((response) => {
+  const disposition = response.headers.get('content-disposition');
+  if (disposition) {
+    const splitDis = disposition.split(';');
+    if (splitDis[0] === 'attachment') {
+      const fileNameDefault = splitDis[1].split('filename=')[1];
+      const fileNameUnicode = disposition.split('filename*=')[1];
+      const filename = fileNameUnicode
+        ? decodeURIComponent(fileNameUnicode.split("''")[1])
+        : fileNameDefault;
+      response
+        .clone()
+        .blob()
+        .then((blob) => {
+          const link = document.createElement('a');
+          link.style.display = 'none';
+          link.href = URL.createObjectURL(blob);
+          link.download = filename;
+          link.click();
+          URL.revokeObjectURL(link.href);
+        });
+    }
+  }
+  return response;
+});
+
 export default request;
