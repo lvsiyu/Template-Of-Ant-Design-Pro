@@ -28,7 +28,7 @@ export default [
                 redirect: '/visualization/basis',
               },
               {
-                name: '基本展示',
+                name: '可视化数据',
                 icon: 'LineChartOutlined',
                 path: '/visualization',
                 routes: [
@@ -38,104 +38,9 @@ export default [
                     component: './visualization/basis',
                   },
                   {
-                    name: '单表格仅观看',
-                    path: '/visualization/personnel',
-                    component: './visualization/personnel',
-                  },
-                  {
-                    name: '重点单位场所管控',
-                    path: '/visualization/place',
-                    component: './visualization/place',
-                  },
-                  {
-                    name: '重点车辆管控',
-                    path: '/visualization/car',
-                    component: './visualization/car',
-                  },
-                  {
-                    name: '矛盾纠纷',
-                    path: '/visualization/contradiction',
-                    component: './visualization/contradiction',
-                  },
-                  {
-                    name: '安全隐患',
-                    path: '/visualization/security',
-                    component: './visualization/security',
-                  },
-                  {
-                    name: '治安防范',
-                    path: '/visualization/guard',
-                    component: './visualization/guard',
-                  },
-                  {
-                    component: './404',
-                  },
-                ],
-              },
-              {
-                name: '网络化信息管理',
-                icon: 'GlobalOutlined',
-                path: '/grid',
-                routes: [
-                  {
-                    name: '网络信息维护',
-                    path: '/grid/network',
-                    component: './grid/network',
-                  },
-                  {
-                    component: './404',
-                  },
-                ],
-              },
-              {
-                name: '四单任务管理',
-                icon: 'FileTextOutlined',
-                path: '/task',
-                routes: [
-                  {
-                    name: '四单任务分配',
-                    path: '/task/distribution',
-                    component: './task/distribution',
-                  },
-                  {
-                    name: '四单任务统计',
-                    path: '/task/statistics',
-                    component: './task/statistics',
-                  },
-                  {
-                    component: './404',
-                  },
-                ],
-              },
-              {
-                name: '临时任务管理',
-                icon: 'ProjectOutlined',
-                path: '/temporary',
-                routes: [
-                  {
-                    name: '临时任务分配',
-                    path: '/temporary/distribution',
-                    component: './temporary/distribution',
-                  },
-                  {
-                    name: '临时任务统计',
-                    path: '/temporary/statistics',
-                    component: './temporary/statistics',
-                  },
-                  {
-                    component: './404',
-                  },
-                ],
-              },
-              {
-                name: '用户管理',
-                icon: 'SettingOutlined',
-                path: '/setting',
-                routes: [
-                  {
-                    name: '用户信息管理',
-                    path: '/setting/user',
-                    component: './setting/user',
+                    name: '弹框统计图',
+                    path: '/visualization/modals',
+                    component: './visualization/modals',
                   },
                   {
                     component: './404',
