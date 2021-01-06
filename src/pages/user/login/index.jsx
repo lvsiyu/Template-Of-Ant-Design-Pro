@@ -1,6 +1,7 @@
 import { LockTwoTone, UserOutlined } from '@ant-design/icons';
-import { Alert } from 'antd';
+import { Alert, message } from 'antd';
 import React from 'react';
+import PropTypes from 'prop-types';
 import ProForm, { ProFormText } from '@ant-design/pro-form';
 import { connect, useIntl } from 'umi';
 import styles from './index.less';
@@ -23,10 +24,14 @@ const Login = (props) => {
 
   const handleSubmit = (values) => {
     const { dispatch } = props;
-    dispatch({
-      type: 'login/login',
-      payload: { ...values },
-    });
+    if (values.userName !== 'admin' && values.passWord !== '123456') {
+      message.error('账号或密码错误，请重新输入！');
+    } else {
+      dispatch({
+        type: 'login/login',
+        payload: { ...values },
+      });
+    }
   };
 
   return (
@@ -91,7 +96,7 @@ const Login = (props) => {
             ]}
           />
           <ProFormText.Password
-            name="password"
+            name="passWord"
             fieldProps={{
               size: 'large',
               prefix: <LockTwoTone className={styles.prefixIcon} />,
@@ -130,3 +135,13 @@ export default connect(({ login, loading }) => ({
   userLogin: login,
   submitting: loading.effects['login/login'],
 }))(Login);
+
+Login.propTypes = {
+  dispatch: PropTypes.any,
+  userLogin: PropTypes.any,
+  submitting: PropTypes.any,
+};
+
+LoginMessage.propTypes = {
+  content: PropTypes.any,
+};
