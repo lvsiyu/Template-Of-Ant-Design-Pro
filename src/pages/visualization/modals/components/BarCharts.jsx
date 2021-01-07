@@ -12,7 +12,7 @@ const BarCharts = (props) => {
         type: 'modalsVisualization/queryBar',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     data: barData,

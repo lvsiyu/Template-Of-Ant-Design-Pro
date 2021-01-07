@@ -12,7 +12,7 @@ const WordCloudCharts = (props) => {
         type: 'modalsVisualization/queryWordCloud',
       });
     }
-  }, []);
+  }, [dispatch]);
   const config = {
     data: wordCloudData,
     wordField: 'x',

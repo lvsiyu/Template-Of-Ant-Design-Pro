@@ -12,7 +12,7 @@ const LineCharts = (props) => {
         type: 'modalsVisualization/queryLine',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     data: lineData,

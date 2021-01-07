@@ -12,7 +12,7 @@ const RadarCharts = (props) => {
         type: 'modalsVisualization/queryRadar',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     data: radarData && radarData.map((d) => ({ ...d, star: Math.log(d.star).toFixed(2) })),

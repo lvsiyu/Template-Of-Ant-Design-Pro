@@ -12,7 +12,7 @@ const PieCharts = (props) => {
         type: 'modalsVisualization/queryPie',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     appendPadding: 10,

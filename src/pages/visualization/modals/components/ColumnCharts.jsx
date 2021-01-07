@@ -12,7 +12,7 @@ const ColumnCharts = (props) => {
         type: 'modalsVisualization/queryColumn',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     data: columnData,
