@@ -93,9 +93,9 @@ export default [
                     component: './table/tabs',
                   },
                   {
-                    name: '交互表格',
-                    path: '/table/action',
-                    component: './table/action',
+                    name: '高级表格',
+                    path: '/table/pro',
+                    component: './table/pro',
                   },
                   {
                     component: './404',

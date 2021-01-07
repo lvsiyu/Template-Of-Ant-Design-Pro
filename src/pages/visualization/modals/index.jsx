@@ -1,94 +1,88 @@
-import React from 'react';
+import React, { useState, Fragment } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'umi';
+import { Row, Col, Card, Button } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
-import ProTable from '@ant-design/pro-table';
-import { selectStationValue } from '@/utils/dictionary';
-import { queryPersonnel } from './service/index';
+import * as Charts from './components/index';
+import * as ChartsModal from './modals/index';
 
-const ModalsVisualization = () => {
-  const columns = [
-    {
-      title: '姓名',
-      dataIndex: 'xm',
-      valueType: 'input',
-    },
-    {
-      title: '性别',
-      dataIndex: 'xb',
-      search: false,
-    },
-    {
-      title: '证件号码',
-      dataIndex: 'zjhm',
-      valueType: 'input',
-    },
-    {
-      title: '人员类型',
-      dataIndex: 'rylx',
-      search: false,
-    },
-    {
-      title: '住址',
-      dataIndex: 'zz',
-      search: false,
-    },
-    {
-      title: '采集派出所',
-      dataIndex: 'cjpcs',
-      valueType: 'select',
-      valueEnum: selectStationValue,
-    },
-    {
-      title: '采集人',
-      dataIndex: 'cjr',
-      search: false,
-    },
-    {
-      title: '采集时间',
-      dataIndex: 'cjsj',
-      search: false,
-    },
-    {
-      title: '采集开始时间',
-      dataIndex: 'collectionStartTime',
-      hideInTable: true,
-      valueType: 'dateTime',
-    },
-    {
-      title: '采集结束时间',
-      dataIndex: 'collectionEndTime',
-      hideInTable: true,
-      valueType: 'dateTime',
-    },
-    /* {
-      title: '操作',
-      dataIndex: 'option',
-      valueType: 'option',
-      render: () => (
-        <Fragment>
-          <a>操作</a>
-          <Divider type="vertical" />
-          <a>操作</a>
-        </Fragment>
-      ),
-    }, */
-  ];
+const ModalsVisualization = (props) => {
+  const { dispatch, lineModalData } = props;
+  const [isLineChartModalVisible, setIsLineChartModalVisible] = useState(false);
+
+  const showLineChartModal = () => {
+    dispatch({
+      type: 'modalsVisualization/queryLine',
+      callback: () => setIsLineChartModalVisible(true),
+    });
+  };
+
+  const handleLineChartOk = () => {
+    setIsLineChartModalVisible(false);
+  };
+
+  const handleLineChartCancel = () => {
+    setIsLineChartModalVisible(false);
+  };
   return (
-    <PageContainer>
-      <ProTable
-        rowKey="id"
-        search={{
-          labelWidth: 120,
-        }}
-        bordered
-        pagination={{
-          showQuickJumper: true,
-        }}
-        headerTitle="重点人员列表"
-        request={(params) => queryPersonnel({ ...params })}
-        columns={columns}
+    <Fragment>
+      <PageContainer>
+        <Row gutter={16}>
+          <Col span={16}>
+            <Card
+              title="主折线图"
+              style={{ height: '509px' }}
+              extra={
+                <Button onClick={showLineChartModal} type="primary">
+                  弹框显示
+                </Button>
+              }
+            >
+              <Charts.LineCharts />
+            </Card>
+          </Col>
+          <Col span={8}>
+            <Card title="柱状图" style={{ marginBottom: '16px', height: '246px' }}>
+              <Charts.ColumnCharts />
+            </Card>
+            <Card title="饼图" style={{ height: '246px' }}>
+              <Charts.PieCharts />
+            </Card>
+          </Col>
+        </Row>
+        <Row gutter={16} style={{ marginTop: '16px' }}>
+          <Col span={12}>
+            <Card title="条形图">
+              <Charts.BarCharts />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card title="雷达图">
+              <Charts.RadarCharts />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card title="词云图">
+              <Charts.WordCloudCharts />
+            </Card>
+          </Col>
+        </Row>
+      </PageContainer>
+      <ChartsModal.LineChartsModal
+        isModalVisible={isLineChartModalVisible}
+        handleOk={handleLineChartOk}
+        handleCancel={handleLineChartCancel}
+        lineData={lineModalData}
       />
-    </PageContainer>
+    </Fragment>
   );
 };
 
-export default ModalsVisualization;
+export default connect(({ modalsVisualization }) => ({
+  lineModalData: modalsVisualization.lineModalData,
+}))(ModalsVisualization);
+
+ModalsVisualization.propTypes = {
+  dispatch: PropTypes.any,
+  lineModalData: PropTypes.any,
+};

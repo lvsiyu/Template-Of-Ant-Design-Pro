@@ -1,17 +1,87 @@
-import * as personnelServices from '../service/index';
+import { message } from 'antd';
+import * as basisServices from '../service/index';
 
-const Modals = {
-  namespace: 'modals',
+const ChartsModel = {
+  namespace: 'modalsVisualization',
   state: {
-    personnelData: null,
+    lineData: null,
+    lineModalData: null,
+    columnData: null,
+    pieData: null,
+    barData: null,
+    radarData: null,
+    wordCloudData: null,
   },
   effects: {
-    *queryLine(_, { call, put }) {
-      const resp = yield call(personnelServices.queryPersonnel);
+    *queryLine(payload, { call, put }) {
+      const { callback } = payload;
+      const resp = yield call(basisServices.queryLine);
+      if (!callback && resp) {
+        yield put({
+          type: 'saveData',
+          payload: {
+            lineData: resp.data || {},
+          },
+        });
+      }
+
+      if (callback && resp) {
+        yield put({
+          type: 'saveData',
+          payload: {
+            lineModalData: resp.data || {},
+          },
+        });
+        callback();
+      }
+      if ((callback && !resp) || (!callback && !resp)) {
+        message.error('错误');
+      }
+    },
+
+    *queryColumn(_, { call, put }) {
+      const resp = yield call(basisServices.queryColumn);
       yield put({
         type: 'saveData',
         payload: {
-          personnelData: resp.data || {},
+          columnData: resp.data || {},
+        },
+      });
+    },
+
+    *queryPie(_, { call, put }) {
+      const resp = yield call(basisServices.queryPie);
+      yield put({
+        type: 'saveData',
+        payload: {
+          pieData: resp.data || {},
+        },
+      });
+    },
+    *queryBar(_, { call, put }) {
+      const resp = yield call(basisServices.queryBar);
+      yield put({
+        type: 'saveData',
+        payload: {
+          barData: resp.data || {},
+        },
+      });
+    },
+    *queryRadar(_, { call, put }) {
+      const resp = yield call(basisServices.queryRadar);
+      yield put({
+        type: 'saveData',
+        payload: {
+          radarData: resp.data || {},
+        },
+      });
+    },
+    *queryWordCloud(_, { call, put }) {
+      const resp = yield call(basisServices.queryWordCloud);
+      yield put({
+        type: 'saveData',
+        payload: {
+          wordCloudData: resp.data || {},
         },
       });
     },
@@ -22,4 +92,4 @@ const Modals = {
     },
   },
 };
-export default Modals;
+export default ChartsModel;
