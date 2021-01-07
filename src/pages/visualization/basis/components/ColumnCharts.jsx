@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Skeleton } from 'antd';
 import { connect } from 'umi';
 import { Column } from '@ant-design/charts';
@@ -8,10 +9,10 @@ const ColumnCharts = (props) => {
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'basis/queryColumn',
+        type: 'basisVisualization/queryColumn',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     data: columnData,
@@ -34,6 +35,11 @@ const ColumnCharts = (props) => {
   return columnData ? <Column {...config} /> : <Skeleton style={{ height: '140px' }} />;
 };
 
-export default connect(({ basis }) => ({
-  columnData: basis.columnData,
+export default connect(({ basisVisualization }) => ({
+  columnData: basisVisualization.columnData,
 }))(ColumnCharts);
+
+ColumnCharts.propTypes = {
+  dispatch: PropTypes.any,
+  columnData: PropTypes.any,
+};

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Skeleton } from 'antd';
 import { connect } from 'umi';
 import { WordCloud } from '@ant-design/charts';
@@ -8,10 +9,10 @@ const WordCloudCharts = (props) => {
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'basis/queryWordCloud',
+        type: 'basisVisualization/queryWordCloud',
       });
     }
-  }, []);
+  }, [dispatch]);
   const config = {
     data: wordCloudData,
     wordField: 'x',
@@ -29,6 +30,11 @@ const WordCloudCharts = (props) => {
   return wordCloudData ? <WordCloud {...config} /> : <Skeleton style={{ height: '200px' }} />;
 };
 
-export default connect(({ basis }) => ({
-  wordCloudData: basis.wordCloudData,
+export default connect(({ basisVisualization }) => ({
+  wordCloudData: basisVisualization.wordCloudData,
 }))(WordCloudCharts);
+
+WordCloudCharts.propTypes = {
+  dispatch: PropTypes.any,
+  wordCloudData: PropTypes.any,
+};
