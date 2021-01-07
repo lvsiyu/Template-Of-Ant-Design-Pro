@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Skeleton } from 'antd';
 import { connect } from 'umi';
 import { Line } from '@ant-design/charts';
@@ -8,10 +9,10 @@ const LineCharts = (props) => {
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'basis/queryLine',
+        type: 'basisVisualization/queryLine',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     data: lineData,
@@ -34,6 +35,11 @@ const LineCharts = (props) => {
   return lineData ? <Line {...config} /> : <Skeleton height={403} />;
 };
 
-export default connect(({ basis }) => ({
-  lineData: basis.lineData,
+export default connect(({ basisVisualization }) => ({
+  lineData: basisVisualization.lineData,
 }))(LineCharts);
+
+LineCharts.propTypes = {
+  dispatch: PropTypes.any,
+  lineData: PropTypes.any,
+};

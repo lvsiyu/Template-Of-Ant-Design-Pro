@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Skeleton } from 'antd';
 import { connect } from 'umi';
 import { Radar } from '@ant-design/charts';
@@ -8,10 +9,10 @@ const RadarCharts = (props) => {
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'basis/queryRadar',
+        type: 'basisVisualization/queryRadar',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     data: radarData && radarData.map((d) => ({ ...d, star: Math.log(d.star).toFixed(2) })),
@@ -43,6 +44,11 @@ const RadarCharts = (props) => {
   return radarData ? <Radar {...config} /> : <Skeleton style={{ height: '200px' }} />;
 };
 
-export default connect(({ basis }) => ({
-  radarData: basis.radarData,
+export default connect(({ basisVisualization }) => ({
+  radarData: basisVisualization.radarData,
 }))(RadarCharts);
+
+RadarCharts.propTypes = {
+  dispatch: PropTypes.any,
+  radarData: PropTypes.any,
+};

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Skeleton } from 'antd';
 import { connect } from 'umi';
 import { Pie } from '@ant-design/charts';
@@ -8,10 +9,10 @@ const PieCharts = (props) => {
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'basis/queryPie',
+        type: 'basisVisualization/queryPie',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     appendPadding: 10,
@@ -31,6 +32,11 @@ const PieCharts = (props) => {
   return pieData ? <Pie {...config} /> : <Skeleton style={{ height: '140px' }} />;
 };
 
-export default connect(({ basis }) => ({
-  pieData: basis.pieData,
+export default connect(({ basisVisualization }) => ({
+  pieData: basisVisualization.pieData,
 }))(PieCharts);
+
+PieCharts.propTypes = {
+  dispatch: PropTypes.any,
+  pieData: PropTypes.any,
+};

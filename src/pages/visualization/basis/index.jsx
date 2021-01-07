@@ -3,7 +3,7 @@ import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import * as Charts from './components/index';
 
-const Basis = () => {
+const BasisVisualization = () => {
   return (
     <PageContainer>
       <Row gutter={16}>
@@ -42,4 +42,4 @@ const Basis = () => {
   );
 };
 
-export default Basis;
+export default BasisVisualization;

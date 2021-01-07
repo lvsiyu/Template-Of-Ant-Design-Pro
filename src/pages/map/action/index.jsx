@@ -5,7 +5,7 @@ import ProTable from '@ant-design/pro-table';
 import { selectStationValue } from '@/utils/dictionary';
 import { queryCar } from './service/index';
 
-const Car = () => {
+const ActionMap = () => {
   const columns = [
     {
       title: '单位名称',
@@ -82,4 +82,4 @@ const Car = () => {
   );
 };
 
-export default Car;
+export default ActionMap;

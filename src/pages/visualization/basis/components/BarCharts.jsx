@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Skeleton } from 'antd';
 import { connect } from 'umi';
 import { Bar } from '@ant-design/charts';
@@ -8,10 +9,10 @@ const BarCharts = (props) => {
   useEffect(() => {
     if (dispatch) {
       dispatch({
-        type: 'basis/queryBar',
+        type: 'basisVisualization/queryBar',
       });
     }
-  }, []);
+  }, [dispatch]);
 
   const config = {
     data: barData,
@@ -25,6 +26,11 @@ const BarCharts = (props) => {
   return barData ? <Bar {...config} /> : <Skeleton style={{ height: '200px' }} />;
 };
 
-export default connect(({ basis }) => ({
-  barData: basis.barData,
+export default connect(({ basisVisualization }) => ({
+  barData: basisVisualization.barData,
 }))(BarCharts);
+
+BarCharts.propTypes = {
+  dispatch: PropTypes.any,
+  barData: PropTypes.any,
+};

@@ -1,7 +1,7 @@
 import * as basisServices from '../service/index';
 
 const ChartsModel = {
-  namespace: 'basis',
+  namespace: 'basisVisualization',
   state: {
     lineData: null,
     columnData: null,
