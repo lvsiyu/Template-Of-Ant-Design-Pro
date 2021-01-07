@@ -4,7 +4,7 @@ import ProTable from '@ant-design/pro-table';
 import { selectStationValue } from '@/utils/dictionary';
 import { queryPersonnel } from './service/index';
 
-const Modals = () => {
+const ModalsVisualization = () => {
   const columns = [
     {
       title: '姓名',
@@ -91,4 +91,4 @@ const Modals = () => {
   );
 };
 
-export default Modals;
+export default ModalsVisualization;

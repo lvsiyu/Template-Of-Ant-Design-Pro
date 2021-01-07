@@ -73,6 +73,166 @@ export default [
                 ],
               },
               {
+                name: '表格模板',
+                icon: 'TableOutlined',
+                path: '/table',
+                routes: [
+                  {
+                    name: '基础表格',
+                    path: '/table/basis',
+                    component: './table/basis',
+                  },
+                  {
+                    name: '弹框表格',
+                    path: '/table/modals',
+                    component: './table/modals',
+                  },
+                  {
+                    name: '分页表格',
+                    path: '/table/tabs',
+                    component: './table/tabs',
+                  },
+                  {
+                    name: '交互表格',
+                    path: '/table/action',
+                    component: './table/action',
+                  },
+                  {
+                    component: './404',
+                  },
+                ],
+              },
+              {
+                name: '列表模板',
+                icon: 'UnorderedListOutlined',
+                path: '/list',
+                routes: [
+                  {
+                    name: '基础列表',
+                    path: '/list/basis',
+                    component: './list/basis',
+                  },
+                  {
+                    name: '弹框列表',
+                    path: '/list/modals',
+                    component: './list/modals',
+                  },
+                  {
+                    name: '分页列表',
+                    path: '/list/tabs',
+                    component: './list/tabs',
+                  },
+                  {
+                    name: '交互列表',
+                    path: '/list/action',
+                    component: './list/action',
+                  },
+                  {
+                    component: './404',
+                  },
+                ],
+              },
+              {
+                name: '详情模板',
+                icon: 'AppstoreOutlined',
+                path: '/detail',
+                routes: [
+                  {
+                    name: '基础详情',
+                    path: '/detail/basis',
+                    component: './detail/basis',
+                  },
+                  {
+                    name: '弹框详情',
+                    path: '/detail/modals',
+                    component: './detail/modals',
+                  },
+                  {
+                    name: '分页详情',
+                    path: '/detail/tabs',
+                    component: './detail/tabs',
+                  },
+                  {
+                    name: '交互详情',
+                    path: '/detail/action',
+                    component: './detail/action',
+                  },
+                  {
+                    component: './404',
+                  },
+                ],
+              },
+              {
+                name: '卡片模板',
+                icon: 'CreditCardOutlined',
+                path: '/card',
+                routes: [
+                  {
+                    name: '基础卡片',
+                    path: '/card/basis',
+                    component: './card/basis',
+                  },
+                  {
+                    name: '弹框卡片',
+                    path: '/card/modals',
+                    component: './card/modals',
+                  },
+                  {
+                    name: '交互卡片',
+                    path: '/card/action',
+                    component: './card/action',
+                  },
+                  {
+                    name: '高级卡片',
+                    path: '/card/pro',
+                    component: './card/pro',
+                  },
+                  {
+                    component: './404',
+                  },
+                ],
+              },
+              {
+                name: '表单模板',
+                icon: 'FormOutlined',
+                path: '/form',
+                routes: [
+                  {
+                    name: '基础表单',
+                    path: '/form/basis',
+                    component: './form/basis',
+                  },
+                  {
+                    name: '弹框表单',
+                    path: '/form/modals',
+                    component: './form/modals',
+                  },
+                  {
+                    name: '高级表单',
+                    path: '/form/pro',
+                    component: './form/pro',
+                  },
+                  {
+                    component: './404',
+                  },
+                ],
+              },
+              {
+                name: '用户中心',
+                icon: 'UserOutlined',
+                path: '/setting',
+                routes: [
+                  {
+                    name: '用户设置',
+                    path: '/setting/user',
+                    component: './setting/user',
+                  },
+                  {
+                    component: './404',
+                  },
+                ],
+              },
+              {
                 component: './404',
               },
             ],
