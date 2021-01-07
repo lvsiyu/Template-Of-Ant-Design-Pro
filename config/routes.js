@@ -123,9 +123,9 @@ export default [
                     component: './list/tabs',
                   },
                   {
-                    name: '交互列表',
-                    path: '/list/action',
-                    component: './list/action',
+                    name: '高级列表',
+                    path: '/list/pro',
+                    component: './list/pro',
                   },
                   {
                     component: './404',
@@ -153,9 +153,9 @@ export default [
                     component: './detail/tabs',
                   },
                   {
-                    name: '交互详情',
-                    path: '/detail/action',
-                    component: './detail/action',
+                    name: '高级详情',
+                    path: '/detail/pro',
+                    component: './detail/pro',
                   },
                   {
                     component: './404',

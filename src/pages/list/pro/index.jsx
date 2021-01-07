@@ -5,7 +5,7 @@ import ProTable from '@ant-design/pro-table';
 import { selectStationValue } from '@/utils/dictionary';
 import { queryCar } from './service/index';
 
-const ActionList = () => {
+const ProLists = () => {
   const columns = [
     {
       title: '单位名称',
@@ -82,4 +82,4 @@ const ActionList = () => {
   );
 };
 
-export default ActionList;
+export default ProLists;
