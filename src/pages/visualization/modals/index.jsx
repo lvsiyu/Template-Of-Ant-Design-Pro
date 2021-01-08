@@ -7,10 +7,11 @@ import * as Charts from './components/index';
 import * as ChartsModal from './modals/index';
 
 const ModalsVisualization = (props) => {
-  const { dispatch, loading, lineModalData, columnModalData, pieModalData } = props;
+  const { dispatch, loading, lineModalData, columnModalData, pieModalData, barModalData } = props;
   const [isLineChartModalVisible, setIsLineChartModalVisible] = useState(false);
   const [isColumnChartModalVisible, setIsColumnChartModalVisible] = useState(false);
-  const [isPiChartModalVisible, setIsPieChartModalVisible] = useState(false);
+  const [isPiehartModalVisible, setIsPieChartModalVisible] = useState(false);
+  const [isBarhartModalVisible, setIsBarChartModalVisible] = useState(false);
 
   /* ******************折线图Modal********************* */
   const showLineChartModal = () => {
@@ -64,6 +65,24 @@ const ModalsVisualization = (props) => {
 
   const handlePieChartCancel = () => {
     setIsPieChartModalVisible(false);
+  };
+
+  /* ******************柱状图Modal********************* */
+  const showBarChartModal = () => {
+    dispatch({
+      type: 'modalsVisualization/queryBar',
+      payload: {
+        callback: () => setIsBarChartModalVisible(true),
+      },
+    });
+  };
+
+  const handleBarChartOk = () => {
+    setIsBarChartModalVisible(false);
+  };
+
+  const handleBarChartCancel = () => {
+    setIsBarChartModalVisible(false);
   };
 
   return (
@@ -125,7 +144,19 @@ const ModalsVisualization = (props) => {
         </Row>
         <Row gutter={16} style={{ marginTop: '16px' }}>
           <Col span={12}>
-            <Card title="条形图">
+            <Card
+              title="条形图"
+              extra={
+                <Button
+                  disabled={!barModalData && false}
+                  onClick={showBarChartModal}
+                  loading={loading}
+                  type="primary"
+                >
+                  弹框显示
+                </Button>
+              }
+            >
               <Charts.BarCharts />
             </Card>
           </Col>
@@ -154,10 +185,16 @@ const ModalsVisualization = (props) => {
         columnData={columnModalData}
       />
       <ChartsModal.PieChartsModal
-        isModalVisible={isPiChartModalVisible}
+        isModalVisible={isPiehartModalVisible}
         handleOk={handlePieChartOk}
         handleCancel={handlePieChartCancel}
         pieData={pieModalData}
+      />
+      <ChartsModal.BarChartsModal
+        isModalVisible={isBarhartModalVisible}
+        handleOk={handleBarChartOk}
+        handleCancel={handleBarChartCancel}
+        barData={barModalData}
       />
     </Fragment>
   );
@@ -167,11 +204,13 @@ export default connect(({ modalsVisualization, loading }) => ({
   lineModalData: modalsVisualization.lineModalData,
   columnModalData: modalsVisualization.columnModalData,
   pieModalData: modalsVisualization.pieModalData,
+  barModalData: modalsVisualization.barModalData,
   loading:
     loading.effects[
       ('modalsVisualization/queryLine',
       'modalsVisualization/queryColumn',
-      'modalsVisualization/queryPie')
+      'modalsVisualization/queryPie',
+      'modalsVisualization/queryBar')
     ],
 }))(ModalsVisualization);
 
@@ -181,4 +220,5 @@ ModalsVisualization.propTypes = {
   lineModalData: PropTypes.any,
   columnModalData: PropTypes.any,
   pieModalData: PropTypes.any,
+  barModalData: PropTypes.any,
 };

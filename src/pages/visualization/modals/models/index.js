@@ -11,6 +11,7 @@ const ChartsModel = {
     pieData: null,
     pieModalData: null,
     barData: null,
+    barModalData: null,
     radarData: null,
     wordCloudData: null,
   },
@@ -89,14 +90,29 @@ const ChartsModel = {
         }
       }
     },
-    *queryBar(_, { call, put }) {
+    *queryBar({ payload }, { call, put }) {
       const resp = yield call(basisServices.queryBar);
-      yield put({
-        type: 'saveData',
-        payload: {
-          barData: resp.data || {},
-        },
-      });
+      if (!payload) {
+        yield put({
+          type: 'saveData',
+          payload: {
+            barData: resp.data || {},
+          },
+        });
+      } else {
+        const { callback } = payload;
+        yield put({
+          type: 'saveData',
+          payload: {
+            barModalData: resp.data || {},
+          },
+        });
+        if (resp && callback) {
+          callback();
+        } else {
+          message.error('错误');
+        }
+      }
     },
     *queryRadar(_, { call, put }) {
       const resp = yield call(basisServices.queryRadar);
