@@ -87,7 +87,7 @@ const Login = (props) => {
               size: 'large',
               prefix: <UserOutlined className={styles.prefixIcon} />,
             }}
-            placeholder="请输入用户名"
+            placeholder="请输入用户名(admin)"
             rules={[
               {
                 required: true,
@@ -101,7 +101,7 @@ const Login = (props) => {
               size: 'large',
               prefix: <LockTwoTone className={styles.prefixIcon} />,
             }}
-            placeholder="请输入密码"
+            placeholder="请输入密码(123456)"
             rules={[
               {
                 required: true,
