@@ -13,6 +13,7 @@ const ChartsModel = {
     barData: null,
     barModalData: null,
     radarData: null,
+    radarModalData: null,
     wordCloudData: null,
   },
   effects: {
@@ -114,14 +115,29 @@ const ChartsModel = {
         }
       }
     },
-    *queryRadar(_, { call, put }) {
+    *queryRadar({ payload }, { call, put }) {
       const resp = yield call(basisServices.queryRadar);
-      yield put({
-        type: 'saveData',
-        payload: {
-          radarData: resp.data || {},
-        },
-      });
+      if (!payload) {
+        yield put({
+          type: 'saveData',
+          payload: {
+            radarData: resp.data || {},
+          },
+        });
+      } else {
+        const { callback } = payload;
+        yield put({
+          type: 'saveData',
+          payload: {
+            radarModalData: resp.data || {},
+          },
+        });
+        if (resp && callback) {
+          callback();
+        } else {
+          message.error('错误');
+        }
+      }
     },
     *queryWordCloud(_, { call, put }) {
       const resp = yield call(basisServices.queryWordCloud);

@@ -7,11 +7,20 @@ import * as Charts from './components/index';
 import * as ChartsModal from './modals/index';
 
 const ModalsVisualization = (props) => {
-  const { dispatch, loading, lineModalData, columnModalData, pieModalData, barModalData } = props;
+  const {
+    dispatch,
+    loading,
+    lineModalData,
+    columnModalData,
+    pieModalData,
+    barModalData,
+    radarModalData,
+  } = props;
   const [isLineChartModalVisible, setIsLineChartModalVisible] = useState(false);
   const [isColumnChartModalVisible, setIsColumnChartModalVisible] = useState(false);
-  const [isPiehartModalVisible, setIsPieChartModalVisible] = useState(false);
-  const [isBarhartModalVisible, setIsBarChartModalVisible] = useState(false);
+  const [isPieChartModalVisible, setIsPieChartModalVisible] = useState(false);
+  const [isBarChartModalVisible, setIsBarChartModalVisible] = useState(false);
+  const [isRadarChartModalVisible, setIsRadarChartModalVisible] = useState(false);
 
   /* ******************折线图Modal********************* */
   const showLineChartModal = () => {
@@ -83,6 +92,24 @@ const ModalsVisualization = (props) => {
 
   const handleBarChartCancel = () => {
     setIsBarChartModalVisible(false);
+  };
+
+  /* ******************雷达图Modal********************* */
+  const showRadarChartModal = () => {
+    dispatch({
+      type: 'modalsVisualization/queryRadar',
+      payload: {
+        callback: () => setIsRadarChartModalVisible(true),
+      },
+    });
+  };
+
+  const handleRadarChartOk = () => {
+    setIsRadarChartModalVisible(false);
+  };
+
+  const handleRadarChartCancel = () => {
+    setIsRadarChartModalVisible(false);
   };
 
   return (
@@ -161,7 +188,19 @@ const ModalsVisualization = (props) => {
             </Card>
           </Col>
           <Col span={6}>
-            <Card title="雷达图">
+            <Card
+              title="雷达图"
+              extra={
+                <Button
+                  disabled={!radarModalData && false}
+                  onClick={showRadarChartModal}
+                  loading={loading}
+                  type="primary"
+                >
+                  弹框显示
+                </Button>
+              }
+            >
               <Charts.RadarCharts />
             </Card>
           </Col>
@@ -185,16 +224,22 @@ const ModalsVisualization = (props) => {
         columnData={columnModalData}
       />
       <ChartsModal.PieChartsModal
-        isModalVisible={isPiehartModalVisible}
+        isModalVisible={isPieChartModalVisible}
         handleOk={handlePieChartOk}
         handleCancel={handlePieChartCancel}
         pieData={pieModalData}
       />
       <ChartsModal.BarChartsModal
-        isModalVisible={isBarhartModalVisible}
+        isModalVisible={isBarChartModalVisible}
         handleOk={handleBarChartOk}
         handleCancel={handleBarChartCancel}
         barData={barModalData}
+      />
+      <ChartsModal.RadarChartsModal
+        isModalVisible={isRadarChartModalVisible}
+        handleOk={handleRadarChartOk}
+        handleCancel={handleRadarChartCancel}
+        radarData={radarModalData}
       />
     </Fragment>
   );
@@ -205,12 +250,14 @@ export default connect(({ modalsVisualization, loading }) => ({
   columnModalData: modalsVisualization.columnModalData,
   pieModalData: modalsVisualization.pieModalData,
   barModalData: modalsVisualization.barModalData,
+  radarModalData: modalsVisualization.radarModalData,
   loading:
     loading.effects[
       ('modalsVisualization/queryLine',
       'modalsVisualization/queryColumn',
       'modalsVisualization/queryPie',
-      'modalsVisualization/queryBar')
+      'modalsVisualization/queryBar',
+      'modalsVisualization/queryRadar')
     ],
 }))(ModalsVisualization);
 
@@ -221,4 +268,5 @@ ModalsVisualization.propTypes = {
   columnModalData: PropTypes.any,
   pieModalData: PropTypes.any,
   barModalData: PropTypes.any,
+  radarModalData: PropTypes.any,
 };
