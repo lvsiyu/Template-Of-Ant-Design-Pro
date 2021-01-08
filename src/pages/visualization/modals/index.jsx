@@ -15,12 +15,14 @@ const ModalsVisualization = (props) => {
     pieModalData,
     barModalData,
     radarModalData,
+    wordCloudModalData,
   } = props;
   const [isLineChartModalVisible, setIsLineChartModalVisible] = useState(false);
   const [isColumnChartModalVisible, setIsColumnChartModalVisible] = useState(false);
   const [isPieChartModalVisible, setIsPieChartModalVisible] = useState(false);
   const [isBarChartModalVisible, setIsBarChartModalVisible] = useState(false);
   const [isRadarChartModalVisible, setIsRadarChartModalVisible] = useState(false);
+  const [isWordCloudChartModalVisible, setIsWordCloudChartModalVisible] = useState(false);
 
   /* ******************折线图Modal********************* */
   const showLineChartModal = () => {
@@ -110,6 +112,24 @@ const ModalsVisualization = (props) => {
 
   const handleRadarChartCancel = () => {
     setIsRadarChartModalVisible(false);
+  };
+
+  /* ******************词云图Modal********************* */
+  const showWordCloudChartModal = () => {
+    dispatch({
+      type: 'modalsVisualization/queryWordCloud',
+      payload: {
+        callback: () => setIsWordCloudChartModalVisible(true),
+      },
+    });
+  };
+
+  const handleWordCloudChartOk = () => {
+    setIsWordCloudChartModalVisible(false);
+  };
+
+  const handleWordCloudChartCancel = () => {
+    setIsWordCloudChartModalVisible(false);
   };
 
   return (
@@ -205,7 +225,19 @@ const ModalsVisualization = (props) => {
             </Card>
           </Col>
           <Col span={6}>
-            <Card title="词云图">
+            <Card
+              title="词云图"
+              extra={
+                <Button
+                  disabled={!wordCloudModalData && false}
+                  onClick={showWordCloudChartModal}
+                  loading={loading}
+                  type="primary"
+                >
+                  弹框显示
+                </Button>
+              }
+            >
               <Charts.WordCloudCharts />
             </Card>
           </Col>
@@ -241,6 +273,12 @@ const ModalsVisualization = (props) => {
         handleCancel={handleRadarChartCancel}
         radarData={radarModalData}
       />
+      <ChartsModal.WordCloudChartsModal
+        isModalVisible={isWordCloudChartModalVisible}
+        handleOk={handleWordCloudChartOk}
+        handleCancel={handleWordCloudChartCancel}
+        wordCloudData={wordCloudModalData}
+      />
     </Fragment>
   );
 };
@@ -251,13 +289,15 @@ export default connect(({ modalsVisualization, loading }) => ({
   pieModalData: modalsVisualization.pieModalData,
   barModalData: modalsVisualization.barModalData,
   radarModalData: modalsVisualization.radarModalData,
+  wordCloudModalData: modalsVisualization.wordCloudModalData,
   loading:
     loading.effects[
       ('modalsVisualization/queryLine',
       'modalsVisualization/queryColumn',
       'modalsVisualization/queryPie',
       'modalsVisualization/queryBar',
-      'modalsVisualization/queryRadar')
+      'modalsVisualization/queryRadar',
+      'modalsVisualization/queryWordCloud')
     ],
 }))(ModalsVisualization);
 
@@ -269,4 +309,5 @@ ModalsVisualization.propTypes = {
   pieModalData: PropTypes.any,
   barModalData: PropTypes.any,
   radarModalData: PropTypes.any,
+  wordCloudModalData: PropTypes.any,
 };
