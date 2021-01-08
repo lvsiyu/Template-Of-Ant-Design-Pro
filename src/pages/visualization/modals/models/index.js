@@ -7,46 +7,61 @@ const ChartsModel = {
     lineData: null,
     lineModalData: null,
     columnData: null,
+    columnModalData: null,
     pieData: null,
     barData: null,
     radarData: null,
     wordCloudData: null,
   },
   effects: {
-    *queryLine(payload, { call, put }) {
-      const { callback } = payload;
+    *queryLine({ payload }, { call, put }) {
       const resp = yield call(basisServices.queryLine);
-      if (!callback && resp) {
+      if (!payload) {
         yield put({
           type: 'saveData',
           payload: {
             lineData: resp.data || {},
           },
         });
-      }
-
-      if (callback && resp) {
+      } else {
+        const { callback } = payload;
         yield put({
           type: 'saveData',
           payload: {
             lineModalData: resp.data || {},
           },
         });
-        callback();
-      }
-      if ((callback && !resp) || (!callback && !resp)) {
-        message.error('错误');
+        if (resp && callback) {
+          callback();
+        } else {
+          message.error('错误');
+        }
       }
     },
 
-    *queryColumn(_, { call, put }) {
+    *queryColumn({ payload }, { call, put }) {
       const resp = yield call(basisServices.queryColumn);
-      yield put({
-        type: 'saveData',
-        payload: {
-          columnData: resp.data || {},
-        },
-      });
+      if (!payload) {
+        yield put({
+          type: 'saveData',
+          payload: {
+            columnData: resp.data || {},
+          },
+        });
+      } else {
+        const { callback } = payload;
+        yield put({
+          type: 'saveData',
+          payload: {
+            columnModalData: resp.data || {},
+          },
+        });
+        if (resp && callback) {
+          callback();
+        } else {
+          message.error('错误');
+        }
+      }
     },
 
     *queryPie(_, { call, put }) {

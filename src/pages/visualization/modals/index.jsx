@@ -7,13 +7,17 @@ import * as Charts from './components/index';
 import * as ChartsModal from './modals/index';
 
 const ModalsVisualization = (props) => {
-  const { dispatch, lineModalData } = props;
+  const { dispatch, lineModalData, columnModalData, loading } = props;
   const [isLineChartModalVisible, setIsLineChartModalVisible] = useState(false);
+  const [isColumnChartModalVisible, setIsColumnChartModalVisible] = useState(false);
 
+  /* ******************折线图Modal********************* */
   const showLineChartModal = () => {
     dispatch({
       type: 'modalsVisualization/queryLine',
-      callback: () => setIsLineChartModalVisible(true),
+      payload: {
+        callback: () => setIsLineChartModalVisible(true),
+      },
     });
   };
 
@@ -24,6 +28,26 @@ const ModalsVisualization = (props) => {
   const handleLineChartCancel = () => {
     setIsLineChartModalVisible(false);
   };
+
+  /* ******************柱状图Modal********************* */
+
+  const showColumnChartModal = () => {
+    dispatch({
+      type: 'modalsVisualization/queryColumn',
+      payload: {
+        callback: () => setIsColumnChartModalVisible(true),
+      },
+    });
+  };
+
+  const handleColumnChartOk = () => {
+    setIsColumnChartModalVisible(false);
+  };
+
+  const handleColumnChartCancel = () => {
+    setIsColumnChartModalVisible(false);
+  };
+
   return (
     <Fragment>
       <PageContainer>
@@ -33,7 +57,12 @@ const ModalsVisualization = (props) => {
               title="主折线图"
               style={{ height: '509px' }}
               extra={
-                <Button onClick={showLineChartModal} type="primary">
+                <Button
+                  disabled={!lineModalData && false}
+                  onClick={showLineChartModal}
+                  loading={loading}
+                  type="primary"
+                >
                   弹框显示
                 </Button>
               }
@@ -42,7 +71,20 @@ const ModalsVisualization = (props) => {
             </Card>
           </Col>
           <Col span={8}>
-            <Card title="柱状图" style={{ marginBottom: '16px', height: '246px' }}>
+            <Card
+              title="柱状图"
+              style={{ marginBottom: '16px', height: '246px' }}
+              extra={
+                <Button
+                  disabled={!lineModalData && false}
+                  onClick={showColumnChartModal}
+                  loading={loading}
+                  type="primary"
+                >
+                  弹框显示
+                </Button>
+              }
+            >
               <Charts.ColumnCharts />
             </Card>
             <Card title="饼图" style={{ height: '246px' }}>
@@ -74,15 +116,25 @@ const ModalsVisualization = (props) => {
         handleCancel={handleLineChartCancel}
         lineData={lineModalData}
       />
+      <ChartsModal.ColumnChartsModal
+        isModalVisible={isColumnChartModalVisible}
+        handleOk={handleColumnChartOk}
+        handleCancel={handleColumnChartCancel}
+        columnData={columnModalData}
+      />
     </Fragment>
   );
 };
 
-export default connect(({ modalsVisualization }) => ({
+export default connect(({ modalsVisualization, loading }) => ({
   lineModalData: modalsVisualization.lineModalData,
+  columnModalData: modalsVisualization.columnModalData,
+  loading: loading.effects[('modalsVisualization/queryLine', 'modalsVisualization/queryColumn')],
 }))(ModalsVisualization);
 
 ModalsVisualization.propTypes = {
   dispatch: PropTypes.any,
+  loading: PropTypes.any,
   lineModalData: PropTypes.any,
+  columnModalData: PropTypes.any,
 };

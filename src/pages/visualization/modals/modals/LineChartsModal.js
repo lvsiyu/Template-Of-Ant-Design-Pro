@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal } from 'antd';
-import { connect } from 'umi';
 import { Line } from '@ant-design/charts';
 
 const LineChartsModal = (props) => {
@@ -39,9 +38,7 @@ const LineChartsModal = (props) => {
   );
 };
 
-export default connect(({ basis }) => ({
-  barData: basis.barData,
-}))(LineChartsModal);
+export default LineChartsModal;
 
 LineChartsModal.propTypes = {
   lineData: PropTypes.any,
