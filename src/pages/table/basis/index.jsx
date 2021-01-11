@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space, Popconfirm, message } from 'antd';
+import { Space, Popconfirm, Tooltip, message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { queryBasisTable } from './service/index';
@@ -11,7 +11,11 @@ const ProcessMap = {
   error: 'exception',
 };
 
-const tableDate = (text, record) => <span>{`${record.date} ${record.time}`}</span>;
+const tableDate = (text, record) => (
+  <Tooltip title={`${record.date} ${record.time}`}>
+    <span>{`${record.date} ${record.time}`}</span>
+  </Tooltip>
+);
 
 const confirm = (e) => {
   console.log(e);
