@@ -8,6 +8,5 @@ const proSettings = {
   title: '后台管理模板',
   pwa: false,
   iconfontUrl: '',
-  headerRender: false,
 };
 export default proSettings;
