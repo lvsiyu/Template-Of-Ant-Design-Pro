@@ -41,7 +41,7 @@ const UserLayout = (props) => {
                 <span className={styles.title}>用户登录</span>
               </Link>
             </div>
-            <div className={styles.desc}>市域社会治理中心指挥中台系统</div>
+            <div className={styles.desc}>企业级用户后台管理模板</div>
           </div>
           {children}
         </div>
