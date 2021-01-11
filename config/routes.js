@@ -47,7 +47,7 @@ export default [
                   },
                 ],
               },
-              {
+              /* {
                 name: '地图可视化',
                 icon: 'DribbbleOutlined',
                 path: '/map',
@@ -71,7 +71,7 @@ export default [
                     component: './404',
                   },
                 ],
-              },
+              }, */
               {
                 name: '表格模板',
                 icon: 'TableOutlined',

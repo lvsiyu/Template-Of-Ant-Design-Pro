@@ -42,8 +42,8 @@ const BasisMap = () => {
           </Card>
         </Col>
         <Col span={8}>
-          <Card title="柱状图" style={{ marginBottom: '16px', height: '246px' }}></Card>
-          <Card title="饼图" style={{ height: '246px' }}></Card>
+          <Card title="待开发" style={{ marginBottom: '16px', height: '246px' }}></Card>
+          <Card title="待开发" style={{ height: '246px' }}></Card>
         </Col>
       </Row>
       {/* <Row gutter={16} style={{ marginTop: '16px' }}>

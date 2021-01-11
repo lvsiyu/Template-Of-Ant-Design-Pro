@@ -74,7 +74,7 @@ const ModalsTable = () => {
         pagination={{
           showQuickJumper: true,
         }}
-        headerTitle="重点车辆列表"
+        headerTitle="弹框表格"
         request={(params) => queryCar({ ...params })}
         columns={columns}
       />
