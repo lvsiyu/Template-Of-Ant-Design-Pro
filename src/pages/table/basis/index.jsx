@@ -1,5 +1,5 @@
 import React from 'react';
-import { Space } from 'antd';
+import { Space, Popconfirm, message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { queryBasisTable } from './service/index';
@@ -13,10 +13,27 @@ const ProcessMap = {
 
 const tableDate = (text, record) => <span>{`${record.date} ${record.time}`}</span>;
 
+const confirm = (e) => {
+  console.log(e);
+  message.success('点了是');
+};
+
+const cancel = (e) => {
+  console.log(e);
+  message.error('点了否');
+};
+
 const tableAction = () => (
   <Space>
-    <a>操作</a>
-    <a>操作</a>
+    <Popconfirm
+      title="确认操作此按钮？"
+      onConfirm={confirm}
+      onCancel={cancel}
+      okText="是"
+      cancelText="否"
+    >
+      <a href="#">操作</a>
+    </Popconfirm>
   </Space>
 );
 
@@ -71,7 +88,7 @@ const BasisTable = () => {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
-      width: 100,
+      width: 70,
       render: tableAction,
     },
   ];
