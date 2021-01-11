@@ -10,7 +10,7 @@ export default defineConfig({
   hash: true,
   antd: {},
   /* base: '/dist/', */
-  publicPath: '/dist/',
+  /* publicPath: '/dist/', */
   dva: {
     hmr: true,
   },
