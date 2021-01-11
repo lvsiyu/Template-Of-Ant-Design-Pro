@@ -88,12 +88,12 @@ export default [
                     component: './table/modals',
                   },
                   {
-                    name: '分页表格',
+                    name: '左右结构表格',
                     path: '/table/tabs',
                     component: './table/tabs',
                   },
                   {
-                    name: '高级表格',
+                    name: '复杂结构表格',
                     path: '/table/pro',
                     component: './table/pro',
                   },

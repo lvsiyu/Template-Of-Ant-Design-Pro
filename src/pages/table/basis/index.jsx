@@ -1,67 +1,79 @@
-/* import { Divider } from 'antd'; */
-import React /* , { Fragment } */ from 'react';
+import React from 'react';
+import { Space } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
-import { selectStationValue } from '@/utils/dictionary';
-import { queryCar } from './service/index';
+import { queryBasisTable } from './service/index';
+
+const ProcessMap = {
+  close: 'normal',
+  running: 'active',
+  online: 'success',
+  error: 'exception',
+};
+
+const tableDate = (text, record) => <span>{`${record.date} ${record.time}`}</span>;
+
+const tableAction = () => (
+  <Space>
+    <a>操作</a>
+    <a>操作</a>
+  </Space>
+);
 
 const BasisTable = () => {
   const columns = [
     {
-      title: '单位名称',
+      title: '基本名称',
       dataIndex: 'name',
       valueType: 'input',
+      ellipsis: true,
     },
     {
-      title: '单位类型',
-      dataIndex: 'type',
+      title: '基本描述',
+      dataIndex: 'description',
       search: false,
+      ellipsis: true,
     },
     {
-      title: '单位地址',
-      dataIndex: 'address',
+      title: '日期显示',
+      dataIndex: 'date-time',
       valueType: 'input',
+      ellipsis: true,
+      render: (text, record) => tableDate(text, record),
     },
     {
-      title: '采集时间',
-      dataIndex: 'time',
-      search: false,
+      title: '状态',
+      dataIndex: 'status',
+      initialValue: 'all',
+      valueEnum: {
+        all: { text: '全部', status: 'Default' },
+        close: { text: '关闭', status: 'Default' },
+        running: { text: '运行中', status: 'Processing' },
+        online: { text: '已上线', status: 'Success' },
+        error: { text: '异常', status: 'Error' },
+      },
     },
     {
-      title: '采集派出所',
-      dataIndex: 'station',
-      valueType: 'select',
-      valueEnum: selectStationValue,
+      title: '进度展示',
+      dataIndex: 'progress',
+      valueType: (item) => ({
+        type: 'progress',
+        status: ProcessMap[item.status],
+      }),
     },
     {
-      title: '采集人',
-      dataIndex: 'collectionPeople',
-      search: false,
-    },
-    {
-      title: '采集开始时间',
-      dataIndex: 'collectionStartTime',
+      title: '时间选择',
+      dataIndex: 'selectTime',
       hideInTable: true,
       valueType: 'dateTime',
     },
     {
-      title: '采集结束时间',
-      dataIndex: 'collectionEndTime',
-      hideInTable: true,
-      valueType: 'dateTime',
-    },
-    /* {
       title: '操作',
       dataIndex: 'option',
       valueType: 'option',
-      render: () => (
-        <Fragment>
-          <a>操作</a>
-          <Divider type="vertical" />
-          <a>操作</a>
-        </Fragment>
-      ),
-    }, */
+      width: 100,
+      render: tableAction,
+    },
   ];
   return (
     <PageContainer>
@@ -73,9 +85,10 @@ const BasisTable = () => {
         bordered
         pagination={{
           showQuickJumper: true,
+          pageSize: 10,
         }}
-        headerTitle="重点车辆列表"
-        request={(params) => queryCar({ ...params })}
+        headerTitle="基础表格"
+        request={(params) => queryBasisTable({ ...params })}
         columns={columns}
       />
     </PageContainer>
