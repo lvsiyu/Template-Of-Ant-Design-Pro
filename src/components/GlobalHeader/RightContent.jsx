@@ -25,8 +25,7 @@ const GlobalHeaderRight = (props) => {
     <div className={className}>
       <HeaderSearch
         className={`${styles.action} ${styles.search}`}
-        placeholder="站内搜索"
-        defaultValue="市域管控平台"
+        placeholder="站内搜索(请输入关键字搜索)"
         options={[
           {
             label: <a href="#">市域管控平台</a>,
