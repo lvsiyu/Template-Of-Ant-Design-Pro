@@ -5,3 +5,7 @@ export async function queryBasisTable(params) {
     params,
   });
 }
+
+export async function queryBasisInnerTable() {
+  return request('/mock/basisInnerTable');
+}

@@ -255,20 +255,6 @@ const tableData = {
   msg: 'success',
 };
 
-const innerTableData = () => {
-  const data = [];
-  for (let i = 0; i < 3; i += 1) {
-    data.push({
-      id: i,
-      name: '我是名称',
-      description: '我是描述',
-      url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
-    });
-  }
-  return data;
-};
-
 export default {
-  'GET /mock/basisTable': tableData,
-  'GET /mock/basisInnerTable': innerTableData(),
+  'GET /mock/modalTable': tableData,
 };

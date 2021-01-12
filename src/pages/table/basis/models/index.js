@@ -1,17 +1,17 @@
-/* import * as personnelServices from '../service/index';
+import * as basisTable from '../service/index';
 
-const ChartsModel = {
-  namespace: 'car',
+const BasisTable = {
+  namespace: 'basisTable',
   state: {
-    personnelData: null,
+    basisInnerTableData: null,
   },
   effects: {
-    *queryLine(_, { call, put }) {
-      const resp = yield call(personnelServices.queryPersonnel);
+    *queryBasisInnerTable(_, { call, put }) {
+      const resp = yield call(basisTable.queryBasisInnerTable);
       yield put({
         type: 'saveData',
         payload: {
-          personnelData: resp.data || {},
+          basisInnerTableData: resp || {},
         },
       });
     },
@@ -22,4 +22,4 @@ const ChartsModel = {
     },
   },
 };
-export default ChartsModel; */
+export default BasisTable;

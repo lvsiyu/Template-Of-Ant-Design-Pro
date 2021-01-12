@@ -1,5 +1,7 @@
-import React from 'react';
-import { Space, Popconfirm, Tooltip, message } from 'antd';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'umi';
+import { Space, Popconfirm, Tooltip, Card, Image, message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { queryBasisTable } from './service/index';
@@ -41,8 +43,26 @@ const tableAction = () => (
   </Space>
 );
 
-const BasisTable = () => {
+const tableInnerImg = (text, record) => <Image width={80} src={record.url} />;
+
+const BasisTable = (props) => {
+  const { dispatch, basisInnerTableData } = props;
+
+  useEffect(() => {
+    if (dispatch) {
+      dispatch({
+        type: 'basisTable/queryBasisInnerTable',
+      });
+    }
+  }, [dispatch]);
+
   const columns = [
+    {
+      title: '排序',
+      dataIndex: 'index',
+      valueType: 'indexBorder',
+      width: 48,
+    },
     {
       title: '基本名称',
       dataIndex: 'name',
@@ -96,6 +116,35 @@ const BasisTable = () => {
       render: tableAction,
     },
   ];
+
+  const innerColumns = [
+    { title: '名称', dataIndex: 'name' },
+    { title: '描述', dataIndex: 'description' },
+    {
+      title: '图片',
+      dataIndex: 'pic',
+      width: 80,
+      render: (text, record) => tableInnerImg(text, record),
+    },
+  ];
+
+  const expandedRowRender = () => {
+    return (
+      <Card title="内嵌表格">
+        <ProTable
+          rowKey="id"
+          columns={innerColumns}
+          headerTitle={false}
+          search={false}
+          options={false}
+          dataSource={basisInnerTableData && basisInnerTableData}
+          pagination={false}
+          bordered
+        />
+      </Card>
+    );
+  };
+
   return (
     <PageContainer>
       <ProTable
@@ -111,9 +160,17 @@ const BasisTable = () => {
         headerTitle="基础表格"
         request={(params) => queryBasisTable({ ...params })}
         columns={columns}
+        expandable={basisInnerTableData && { expandedRowRender }}
       />
     </PageContainer>
   );
 };
 
-export default BasisTable;
+export default connect(({ basisTable }) => ({
+  basisInnerTableData: basisTable.basisInnerTableData,
+}))(BasisTable);
+
+BasisTable.propTypes = {
+  dispatch: PropTypes.any,
+  basisInnerTableData: PropTypes.any,
+};
