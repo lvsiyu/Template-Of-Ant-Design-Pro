@@ -13,6 +13,12 @@ const ProcessMap = {
   error: 'exception',
 };
 
+/* const tableGetText = (text) => (
+  <Tooltip title={text}>
+    <span>{text}</span>
+  </Tooltip>
+); */
+
 const tableDate = (text, record) => (
   <Tooltip title={`${record.date} ${record.time}`}>
     <span>{`${record.date} ${record.time}`}</span>
@@ -118,7 +124,7 @@ const BasisTable = (props) => {
   ];
 
   const innerColumns = [
-    { title: '名称', dataIndex: 'name' },
+    { title: '名称', dataIndex: 'name', width: 200 },
     { title: '描述', dataIndex: 'description' },
     {
       title: '图片',
