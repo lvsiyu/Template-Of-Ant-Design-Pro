@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import { Tooltip, Space } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { queryModalTable } from './service/index';
+import { TableModal } from './modals';
 
 const ProcessMap = {
   close: 'normal',
@@ -17,13 +18,27 @@ const tableDate = (text, record) => (
   </Tooltip>
 );
 
-const tableAction = () => (
+const tableAction = (showModal) => (
   <Space>
-    <a href="#">操作</a>
+    <a onClick={showModal}>弹框</a>
   </Space>
 );
 
 const ModalTable = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleModalOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleModalCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const columns = [
     {
       title: '排序',
@@ -81,27 +96,34 @@ const ModalTable = () => {
       dataIndex: 'option',
       valueType: 'option',
       width: 70,
-      render: tableAction,
+      render: () => tableAction(showModal),
     },
   ];
 
   return (
-    <PageContainer>
-      <ProTable
-        rowKey="id"
-        search={{
-          labelWidth: 120,
-        }}
-        bordered
-        pagination={{
-          showQuickJumper: true,
-          pageSize: 10,
-        }}
-        headerTitle="基础表格"
-        request={(params) => queryModalTable({ ...params })}
-        columns={columns}
+    <Fragment>
+      <PageContainer>
+        <ProTable
+          rowKey="id"
+          search={{
+            labelWidth: 120,
+          }}
+          bordered
+          pagination={{
+            showQuickJumper: true,
+            pageSize: 10,
+          }}
+          headerTitle="基础表格"
+          request={(params) => queryModalTable({ ...params })}
+          columns={columns}
+        />
+      </PageContainer>
+      <TableModal
+        visible={isModalVisible}
+        handleClickOk={handleModalOk}
+        handleClickCancel={handleModalCancel}
       />
-    </PageContainer>
+    </Fragment>
   );
 };
 

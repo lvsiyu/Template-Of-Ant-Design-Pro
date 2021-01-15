@@ -2,17 +2,14 @@ import { Modal } from 'antd';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AssignmentsModal = (props) => {
+const TableModal = (props) => {
   const { visible, handleClickOk, handleClickCancel } = props;
 
-  const modalClickOkChangeData = () => {
-    handleClickOk(22);
-  };
   return (
     <Modal
-      title="分配任务"
+      title="弹框列表"
       visible={visible}
-      onOk={modalClickOkChangeData}
+      onOk={handleClickOk}
       onCancel={handleClickCancel}
       centered
     >
@@ -23,8 +20,9 @@ const AssignmentsModal = (props) => {
   );
 };
 
-export default AssignmentsModal;
-AssignmentsModal.propTypes = {
+export default TableModal;
+
+TableModal.propTypes = {
   visible: PropTypes.any,
   handleClickOk: PropTypes.any,
   handleClickCancel: PropTypes.any,
