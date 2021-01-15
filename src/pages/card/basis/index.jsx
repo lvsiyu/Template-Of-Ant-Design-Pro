@@ -74,7 +74,7 @@ const BasisCard = () => {
         pagination={{
           showQuickJumper: true,
         }}
-        headerTitle="重点车辆列表"
+        headerTitle="暂未开发"
         request={(params) => queryCar({ ...params })}
         columns={columns}
       />

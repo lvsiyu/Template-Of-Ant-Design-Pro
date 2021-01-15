@@ -113,7 +113,7 @@ const ModalTable = () => {
             showQuickJumper: true,
             pageSize: 10,
           }}
-          headerTitle="基础表格"
+          headerTitle="弹框表格"
           request={(params) => queryModalTable({ ...params })}
           columns={columns}
         />
