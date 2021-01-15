@@ -24,7 +24,7 @@ const Login = (props) => {
 
   const handleSubmit = (values) => {
     const { dispatch } = props;
-    if (values.userName !== 'admin' && values.passWord !== '123456') {
+    if (values.userName !== 'admin' || values.passWord !== '123456') {
       message.error('账号或密码错误，请重新输入！');
     } else {
       dispatch({
