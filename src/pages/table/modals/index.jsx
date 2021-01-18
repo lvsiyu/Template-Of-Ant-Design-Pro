@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Tooltip, Space } from 'antd';
+import { Tooltip, Space, message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
 import { queryModalTable } from './service/index';
@@ -31,8 +31,11 @@ const ModalTable = () => {
     setIsModalVisible(true);
   };
 
-  const handleModalOk = () => {
+  const handleModalOk = (selectData) => {
     setIsModalVisible(false);
+    if (selectData && selectData.length > 0) {
+      message.success(`成功选择了${selectData.length}条数据!`);
+    }
   };
 
   const handleModalCancel = () => {

@@ -5,3 +5,9 @@ export async function queryModalTable(params) {
     params,
   });
 }
+
+export async function queryModalTable2(params) {
+  return request('/mock/modalTable2', {
+    params,
+  });
+}
