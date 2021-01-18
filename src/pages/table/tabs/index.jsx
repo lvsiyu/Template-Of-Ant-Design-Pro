@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { PageContainer } from '@ant-design/pro-layout';
 import { Button, Badge } from 'antd';
 import ProTable from '@ant-design/pro-table';
 import ProCard from '@ant-design/pro-card';
@@ -37,10 +38,7 @@ const DetailList = (props) => {
     for (let i = 0; i < 15; i += 1) {
       source.push({
         createdAt: Date.now() - Math.floor(Math.random() * 10000),
-        code: `const getData = async params => {
-          const data = await getData(params);
-          return { list: data.data, ...data };
-        };`,
+        code: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容\n我是内容我是内容我是内容我是内容我是内容\n我是内容我是内容我是内容`,
         key: i,
       });
     }
@@ -142,7 +140,7 @@ const IPList = (props) => {
       }}
       options={false}
       pagination={{
-        pageSize: 15,
+        pageSize: 13,
         showSizeChanger: false,
       }}
       search={false}
@@ -167,14 +165,16 @@ IPList.propTypes = {
 const TabsTable = () => {
   const [ip, setIp] = useState('0.0.0.0');
   return (
-    <ProCard split="vertical">
-      <ProCard colSpan="384px" ghost>
-        <IPList onChange={(cIp) => setIp(cIp)} ip={ip} />
+    <PageContainer>
+      <ProCard split="vertical" title="左右结构表格" extra="副标题" bordered headerBordered>
+        <ProCard colSpan="384px" ghost>
+          <IPList onChange={(cIp) => setIp(cIp)} ip={ip} />
+        </ProCard>
+        <ProCard title={ip}>
+          <DetailList ip={ip} />
+        </ProCard>
       </ProCard>
-      <ProCard title={ip}>
-        <DetailList ip={ip} />
-      </ProCard>
-    </ProCard>
+    </PageContainer>
   );
 };
 export default TabsTable;
