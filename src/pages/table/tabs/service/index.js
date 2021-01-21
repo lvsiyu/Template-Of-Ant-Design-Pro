@@ -1,7 +1,13 @@
 import request from '@/utils/request';
 
-export async function queryCar(params) {
-  return request('/mock/car', {
+export async function queryLeftTable(params) {
+  return request('/mock/tabsTableLeft', {
+    params,
+  });
+}
+
+export async function queryRightTable(params) {
+  return request('/mock/tabsTableRight', {
     params,
   });
 }

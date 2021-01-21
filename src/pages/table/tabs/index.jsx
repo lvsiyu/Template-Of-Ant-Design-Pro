@@ -1,180 +1,73 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Button, Badge } from 'antd';
-import ProTable from '@ant-design/pro-table';
 import ProCard from '@ant-design/pro-card';
-import styles from './styles/index.less';
+import { message } from 'antd';
+import { TableLeftList, TableRightList } from './Tables/index';
+import PropTypes from 'prop-types';
 
-const tableIp = (item) => <Badge status={item.status} text={item.ip} />;
+const TabsTable = (props) => {
+  const { dispatch, tableRightData, loading } = props;
+  const [id, setId] = useState('0');
+  const [name, setName] = useState('默认名称');
+  const [rightTableData, setRightTableData] = useState(null);
 
-const DetailList = (props) => {
-  const { ip } = props;
-  const [tableListDataSource, setTableListDataSource] = useState([]);
-  const columns = [
-    {
-      title: '时间点',
-      key: 'createdAt',
-      dataIndex: 'createdAt',
-      valueType: 'dateTime',
-    },
-    {
-      title: '代码',
-      key: 'code',
-      width: 80,
-      dataIndex: 'code',
-      valueType: 'code',
-    },
-    {
-      title: '操作',
-      key: 'option',
-      width: 80,
-      valueType: 'option',
-      render: () => [<a key="a">预警</a>],
-    },
-  ];
   useEffect(() => {
-    const source = [];
-    for (let i = 0; i < 15; i += 1) {
-      source.push({
-        createdAt: Date.now() - Math.floor(Math.random() * 10000),
-        code: `我是内容我是内容我是内容我是内容我是内容我是内容我是内容\n我是内容我是内容我是内容我是内容我是内容\n我是内容我是内容我是内容`,
-        key: i,
-      });
-    }
-    setTableListDataSource(source);
-  }, [ip]);
-  return (
-    <ProTable
-      columns={columns}
-      dataSource={tableListDataSource}
-      pagination={{
-        pageSize: 5,
-        showSizeChanger: false,
-      }}
-      rowKey="key"
-      toolBarRender={false}
-      search={false}
-    />
-  );
-};
-
-DetailList.propTypes = {
-  ip: PropTypes.any,
-};
-
-const valueEnum = ['success', 'error', 'processing', 'default'];
-const ipListDataSource = [];
-for (let i = 0; i < 20; i += 1) {
-  ipListDataSource.push({
-    ip: `106.14.98.1${i}4`,
-    cpu: 10,
-    mem: 20,
-    status: valueEnum[Math.floor(Math.random() * 10) % 4],
-    disk: 30,
-  });
-}
-const IPList = (props) => {
-  const { onChange, ip } = props;
-  const columns = [
-    {
-      title: 'IP',
-      key: 'ip',
-      dataIndex: 'ip',
-      render: (_, item) => tableIp(item),
-    },
-    {
-      title: 'CPU',
-      key: 'cpu',
-      dataIndex: 'cpu',
-      valueType: {
-        type: 'percent',
-        precision: 0,
-      },
-    },
-    {
-      title: 'Mem',
-      key: 'mem',
-      dataIndex: 'mem',
-      valueType: {
-        type: 'percent',
-        precision: 0,
-      },
-    },
-    {
-      title: 'Disk',
-      key: 'disk',
-      dataIndex: 'disk',
-      valueType: {
-        type: 'percent',
-        precision: 0,
-      },
-    },
-  ];
-  return (
-    <ProTable
-      columns={columns}
-      request={(params, sorter, filter) => {
-        // 表单搜索项会从 params 传入，传递给后端接口。
-        console.log(params, sorter, filter);
-        return Promise.resolve({
-          data: ipListDataSource,
-          success: true,
-        });
-      }}
-      rowKey="ip"
-      rowClassName={(record) => {
-        return record.ip === ip ? styles['split-row-select-active'] : '';
-      }}
-      toolbar={{
-        search: {
-          onSearch: (value) => {
-            alert(value);
+    if (dispatch) {
+      dispatch({
+        type: 'tabsTable/queryRightTable',
+        payload: {
+          value: { id: 'all' },
+          callback: (respData) => {
+            setRightTableData(respData);
           },
         },
-        actions: [
-          <Button key="list" type="primary">
-            新建项目
-          </Button>,
-        ],
-      }}
-      options={false}
-      pagination={{
-        pageSize: 13,
-        showSizeChanger: false,
-      }}
-      search={false}
-      onRow={(record) => {
-        return {
-          onClick: () => {
-            if (record.ip) {
-              onChange(record.ip);
-            }
-          },
-        };
-      }}
-    />
-  );
-};
+      });
+    }
+  }, [dispatch]);
 
-IPList.propTypes = {
-  onChange: PropTypes.any,
-  ip: PropTypes.any,
-};
+  const queryRightTableSuccess = (newId, newName) => {
+    message.success('查询成功');
+    setId(newId);
+    setName(newName);
+    setRightTableData(tableRightData);
+  };
 
-const TabsTable = () => {
-  const [ip, setIp] = useState('0.0.0.0');
+  const changeSelect = (newId, newName) => {
+    dispatch({
+      type: 'tabsTable/queryRightTable',
+      payload: {
+        value: { id: newId },
+        callback: () => queryRightTableSuccess(newId, newName),
+      },
+    });
+  };
   return (
     <PageContainer>
       <ProCard split="vertical" title="左右结构表格" extra="副标题" bordered headerBordered>
         <ProCard colSpan="384px" ghost>
-          <IPList onChange={(cIp) => setIp(cIp)} ip={ip} />
+          <TableLeftList
+            onChange={(newId, newCode) => changeSelect(newId, newCode)}
+            loading={loading}
+            id={id}
+            name={name}
+          />
         </ProCard>
-        <ProCard title={ip}>
-          <DetailList ip={ip} />
+        <ProCard title={`${name}-详细内容`}>
+          <TableRightList data={rightTableData} />
         </ProCard>
       </ProCard>
     </PageContainer>
   );
 };
-export default TabsTable;
+
+export default connect(({ tabsTable, loading }) => ({
+  tableRightData: tabsTable.tableRightData,
+  loading: loading.effects['tabsTable/queryRightTable'],
+}))(TabsTable);
+
+TabsTable.propTypes = {
+  dispatch: PropTypes.any,
+  tableRightData: PropTypes.any,
+  loading: PropTypes.any,
+};

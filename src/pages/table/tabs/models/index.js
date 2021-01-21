@@ -1,19 +1,23 @@
-/* import * as personnelServices from '../service/index';
+import * as tabsTableService from '../service/index';
 
-const ChartsModel = {
-  namespace: 'car',
+const tabsTableModal = {
+  namespace: 'tabsTable',
   state: {
-    personnelData: null,
+    tableRightData: null,
   },
   effects: {
-    *queryLine(_, { call, put }) {
-      const resp = yield call(personnelServices.queryPersonnel);
+    *queryRightTable({ payload }, { call, put }) {
+      const { value, callback } = payload;
+      const resp = yield call(tabsTableService.queryRightTable, value);
       yield put({
         type: 'saveData',
         payload: {
-          personnelData: resp.data || {},
+          tableRightData: resp.data || {},
         },
       });
+      if (resp && callback) {
+        callback(resp.data);
+      }
     },
   },
   reducers: {
@@ -22,4 +26,4 @@ const ChartsModel = {
     },
   },
 };
-export default ChartsModel; */
+export default tabsTableModal;
