@@ -1,82 +1,122 @@
-/* import { Divider } from 'antd'; */
-import React /* , { Fragment } */ from 'react';
+import React, { useState } from 'react';
+import { Card, Menu, Descriptions } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
-import { selectStationValue } from '@/utils/dictionary';
-import { queryCar } from './service/index';
+import { MailOutlined } from '@ant-design/icons';
 
 const PrpTables = () => {
+  const [key, setKey] = useState('1');
+
+  const waitTime = (time = 100) => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, time);
+    });
+  };
+  const tableListDataSource = [];
+  for (let i = 0; i < 2; i += 1) {
+    tableListDataSource.push({
+      key: i,
+      name: `TradeCode ${i}`,
+      createdAt: Date.now() - Math.floor(Math.random() * 2000),
+      progress: Math.ceil(Math.random() * 100) + 1,
+    });
+  }
   const columns = [
     {
-      title: '单位名称',
-      dataIndex: 'name',
-      valueType: 'input',
+      title: '序号',
+      dataIndex: 'index',
+      valueType: 'index',
+      width: 80,
     },
     {
-      title: '单位类型',
-      dataIndex: 'type',
-      search: false,
+      title: '更新时间',
+      key: 'since2',
+      dataIndex: 'createdAt',
+      valueType: 'date',
     },
     {
-      title: '单位地址',
-      dataIndex: 'address',
-      valueType: 'input',
+      title: '执行进度',
+      dataIndex: 'progress',
+      valueType: 'progress',
     },
-    {
-      title: '采集时间',
-      dataIndex: 'time',
-      search: false,
-    },
-    {
-      title: '采集派出所',
-      dataIndex: 'station',
-      valueType: 'select',
-      valueEnum: selectStationValue,
-    },
-    {
-      title: '采集人',
-      dataIndex: 'collectionPeople',
-      search: false,
-    },
-    {
-      title: '采集开始时间',
-      dataIndex: 'collectionStartTime',
-      hideInTable: true,
-      valueType: 'dateTime',
-    },
-    {
-      title: '采集结束时间',
-      dataIndex: 'collectionEndTime',
-      hideInTable: true,
-      valueType: 'dateTime',
-    },
-    /* {
-      title: '操作',
-      dataIndex: 'option',
-      valueType: 'option',
-      render: () => (
-        <Fragment>
-          <a>操作</a>
-          <Divider type="vertical" />
-          <a>操作</a>
-        </Fragment>
-      ),
-    }, */
   ];
   return (
     <PageContainer>
       <ProTable
-        rowKey="id"
-        search={{
-          labelWidth: 120,
-        }}
-        bordered
-        pagination={{
-          showQuickJumper: true,
-        }}
-        headerTitle="暂未开发"
-        request={(params) => queryCar({ ...params })}
         columns={columns}
+        rowKey="key"
+        pagination={{
+          showSizeChanger: true,
+        }}
+        tableRender={(_, dom) => (
+          <div
+            style={{
+              display: 'flex',
+              width: '100%',
+            }}
+          >
+            <Menu
+              onSelect={(e) => setKey(e.key)}
+              style={{ width: 256 }}
+              defaultSelectedKeys={['1']}
+              defaultOpenKeys={['sub1']}
+              mode="inline"
+            >
+              <Menu.SubMenu
+                key="sub1"
+                title={
+                  <span>
+                    <MailOutlined />
+                    <span>Navigation One</span>
+                  </span>
+                }
+              >
+                <Menu.ItemGroup key="g1" title="Item 1">
+                  <Menu.Item key="1">Option 1</Menu.Item>
+                  <Menu.Item key="2">Option 2</Menu.Item>
+                </Menu.ItemGroup>
+                <Menu.ItemGroup key="g2" title="Item 2">
+                  <Menu.Item key="3">Option 3</Menu.Item>
+                  <Menu.Item key="4">Option 4</Menu.Item>
+                </Menu.ItemGroup>
+              </Menu.SubMenu>
+            </Menu>
+            <div
+              style={{
+                flex: 1,
+              }}
+            >
+              {dom}
+            </div>
+          </div>
+        )}
+        tableExtraRender={(_, data) => (
+          <Card>
+            <Descriptions size="small" column={3}>
+              <Descriptions.Item label="Row">{data.length}</Descriptions.Item>
+              <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
+              <Descriptions.Item label="Association">
+                <a>421421</a>
+              </Descriptions.Item>
+              <Descriptions.Item label="Creation Time">2017-01-10</Descriptions.Item>
+              <Descriptions.Item label="Effective Time">2017-10-10</Descriptions.Item>
+            </Descriptions>
+          </Card>
+        )}
+        params={{
+          key,
+        }}
+        request={async () => {
+          await waitTime(200);
+          return {
+            success: true,
+            data: tableListDataSource,
+          };
+        }}
+        dateFormatter="string"
+        headerTitle="自定义表格主体"
       />
     </PageContainer>
   );
