@@ -1,11 +1,22 @@
 import React, { useState } from 'react';
-import { Card, Menu, Descriptions } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
-import { MailOutlined } from '@ant-design/icons';
+import { ProTableMenu, ProTableDescriptions } from './components/index';
+
+const rootSubmenuKeys = ['sub1', 'sub2'];
 
 const PrpTables = () => {
   const [key, setKey] = useState('1');
+  const [openKeys, setOpenKeys] = React.useState(['sub1']);
+
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((items) => openKeys.indexOf(items) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
 
   const waitTime = (time = 100) => {
     return new Promise((resolve) => {
@@ -46,68 +57,16 @@ const PrpTables = () => {
     <PageContainer>
       <ProTable
         columns={columns}
+        bordered
         rowKey="key"
         pagination={{
           showSizeChanger: true,
         }}
         tableRender={(_, dom) => (
-          <div
-            style={{
-              display: 'flex',
-              width: '100%',
-            }}
-          >
-            <Menu
-              onSelect={(e) => setKey(e.key)}
-              style={{ width: 256 }}
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
-              mode="inline"
-            >
-              <Menu.SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <MailOutlined />
-                    <span>Navigation One</span>
-                  </span>
-                }
-              >
-                <Menu.ItemGroup key="g1" title="Item 1">
-                  <Menu.Item key="1">Option 1</Menu.Item>
-                  <Menu.Item key="2">Option 2</Menu.Item>
-                </Menu.ItemGroup>
-                <Menu.ItemGroup key="g2" title="Item 2">
-                  <Menu.Item key="3">Option 3</Menu.Item>
-                  <Menu.Item key="4">Option 4</Menu.Item>
-                </Menu.ItemGroup>
-              </Menu.SubMenu>
-            </Menu>
-            <div
-              style={{
-                flex: 1,
-              }}
-            >
-              {dom}
-            </div>
-          </div>
+          <ProTableMenu dom={dom} setKey={setKey} openKeys={openKeys} onOpenChange={onOpenChange} />
         )}
-        tableExtraRender={(_, data) => (
-          <Card>
-            <Descriptions size="small" column={3}>
-              <Descriptions.Item label="Row">{data.length}</Descriptions.Item>
-              <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
-              <Descriptions.Item label="Association">
-                <a>421421</a>
-              </Descriptions.Item>
-              <Descriptions.Item label="Creation Time">2017-01-10</Descriptions.Item>
-              <Descriptions.Item label="Effective Time">2017-10-10</Descriptions.Item>
-            </Descriptions>
-          </Card>
-        )}
-        params={{
-          key,
-        }}
+        tableExtraRender={(_, data) => <ProTableDescriptions data={data} />}
+        params={{ key }}
         request={async () => {
           await waitTime(200);
           return {
@@ -116,7 +75,7 @@ const PrpTables = () => {
           };
         }}
         dateFormatter="string"
-        headerTitle="自定义表格主体"
+        headerTitle="正在开发中"
       />
     </PageContainer>
   );
