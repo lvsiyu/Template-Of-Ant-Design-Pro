@@ -118,14 +118,14 @@ export default [
                     component: './list/modals',
                   },
                   {
-                    name: '分页列表',
-                    path: '/list/tabs',
-                    component: './list/tabs',
+                    name: '卡片列表',
+                    path: '/list/cards',
+                    component: './list/cards',
                   },
                   {
-                    name: '高级列表',
-                    path: '/list/pro',
-                    component: './list/pro',
+                    name: '详情列表',
+                    path: '/list/details',
+                    component: './list/details',
                   },
                   {
                     component: './404',

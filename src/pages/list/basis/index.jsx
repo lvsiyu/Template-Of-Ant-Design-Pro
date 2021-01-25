@@ -1,6 +1,7 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'umi';
+import { PageContainer } from '@ant-design/pro-layout';
 import { Button, Progress, Tag, Space, Card } from 'antd';
 import ProList from '@ant-design/pro-list';
 
@@ -70,7 +71,7 @@ const BasisList = (props) => {
   };
 
   return (
-    <Fragment>
+    <PageContainer>
       <Card>
         <ProList
           rowKey="title"
@@ -94,7 +95,7 @@ const BasisList = (props) => {
       <Card style={{ marginTop: 15 }}>
         <ProList
           rowKey="title"
-          headerTitle="带请求数据的列表"
+          headerTitle="带请求数据的基础列表"
           toolBarRender={basisListToolBar}
           expandable={{ expandedRowKeys, onExpandedRowsChange: setExpandedRowKeys }}
           dataSource={basisListData && basisListData}
@@ -112,7 +113,7 @@ const BasisList = (props) => {
           }}
         />
       </Card>
-    </Fragment>
+    </PageContainer>
   );
 };
 
