@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Button, Progress, Tag, Space, Card } from 'antd';
+import { Button, Progress, Tag, Space, Card, Popconfirm, message } from 'antd';
 import ProList from '@ant-design/pro-list';
 
 const dataSource = [];
@@ -29,6 +29,16 @@ const BasisList = (props) => {
       });
     }
   }, [dispatch]);
+
+  const confirm = (e) => {
+    console.log(e);
+    message.success('Click on Yes');
+  };
+
+  const cancel = (e) => {
+    console.log(e);
+    message.success('Click on Yes');
+  };
 
   const basisListTag = () => {
     return (
@@ -59,7 +69,17 @@ const BasisList = (props) => {
   };
 
   const basisListAction = () => {
-    return <a>操作</a>;
+    return (
+      <Popconfirm
+        title="确认操作?"
+        onConfirm={confirm}
+        onCancel={cancel}
+        okText="是"
+        cancelText="否"
+      >
+        <a>操作</a>
+      </Popconfirm>
+    );
   };
 
   const basisListToolBar = () => {

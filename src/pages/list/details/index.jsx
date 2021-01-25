@@ -9,7 +9,7 @@ import { fillKeyValues } from '@/utils/common';
 
 const IconText = ({ icon, text }) => (
   <span>
-    {React.createElement(icon, { style: { marginRight: 8 } })}
+    {React.createElement(icon, { style: { marginRight: 4 } })}
     {text}
   </span>
 );
