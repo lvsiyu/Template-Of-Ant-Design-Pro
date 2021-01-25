@@ -33,7 +33,6 @@ const ProTableMenu = (props) => {
           <Menu.Item key="1">子菜单1</Menu.Item>
           <Menu.Item key="2">子菜单2</Menu.Item>
           <Menu.Item key="3">子菜单3</Menu.Item>
-          <Menu.Item key="4">子菜单4</Menu.Item>
         </Menu.SubMenu>
         <Menu.SubMenu
           key="sub2"
@@ -44,10 +43,9 @@ const ProTableMenu = (props) => {
             </span>
           }
         >
-          <Menu.Item key="5">子菜单1</Menu.Item>
-          <Menu.Item key="6">子菜单2</Menu.Item>
-          <Menu.Item key="7">子菜单3</Menu.Item>
-          <Menu.Item key="8">子菜单4</Menu.Item>
+          <Menu.Item key="5">子菜单5</Menu.Item>
+          <Menu.Item key="6">子菜单6</Menu.Item>
+          <Menu.Item key="7">子菜单7</Menu.Item>
         </Menu.SubMenu>
       </Menu>
       <div

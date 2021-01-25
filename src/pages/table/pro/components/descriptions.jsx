@@ -1,19 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, Descriptions } from 'antd';
+import moment from 'moment';
 
 const ProTableDescriptions = (props) => {
   const { data } = props;
   return (
     <Card>
       <Descriptions size="small" column={3}>
-        <Descriptions.Item label="Row">{data.length}</Descriptions.Item>
-        <Descriptions.Item label="Created">Lili Qu</Descriptions.Item>
-        <Descriptions.Item label="Association">
+        <Descriptions.Item label="子菜单长度">{data.length}</Descriptions.Item>
+        <Descriptions.Item label="创建人">
+          {data && data.length > 0 && data[0].name}
+        </Descriptions.Item>
+        <Descriptions.Item label="编号">
           <a>421421</a>
         </Descriptions.Item>
-        <Descriptions.Item label="Creation Time">2017-01-10</Descriptions.Item>
-        <Descriptions.Item label="Effective Time">2017-10-10</Descriptions.Item>
+        <Descriptions.Item label="创建时间">
+          {moment(data && data.length > 0 && data[0].createdAt).format('YYYY-MM-DD hh:ss:mm')}
+        </Descriptions.Item>
+        <Descriptions.Item label="更新时间">
+          {moment(data && data.length > 0 && data[0].createdAt).format('YYYY-MM-DD hh:ss:mm')}
+        </Descriptions.Item>
       </Descriptions>
     </Card>
   );

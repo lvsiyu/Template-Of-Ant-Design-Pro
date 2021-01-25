@@ -29,7 +29,7 @@ const PrpTables = () => {
   for (let i = 0; i < 2; i += 1) {
     tableListDataSource.push({
       key: i,
-      name: `TradeCode ${i}`,
+      name: `创建人 ${i}`,
       createdAt: Date.now() - Math.floor(Math.random() * 2000),
       progress: Math.ceil(Math.random() * 100) + 1,
     });
@@ -42,13 +42,17 @@ const PrpTables = () => {
       width: 80,
     },
     {
-      title: '更新时间',
-      key: 'since2',
+      title: '创建人',
+      dataIndex: 'name',
+      valueType: 'string',
+    },
+    {
+      title: '时间',
       dataIndex: 'createdAt',
       valueType: 'date',
     },
     {
-      title: '执行进度',
+      title: '进度条',
       dataIndex: 'progress',
       valueType: 'progress',
     },
@@ -75,7 +79,7 @@ const PrpTables = () => {
           };
         }}
         dateFormatter="string"
-        headerTitle="正在开发中"
+        headerTitle={`子菜单${key}`}
       />
     </PageContainer>
   );
