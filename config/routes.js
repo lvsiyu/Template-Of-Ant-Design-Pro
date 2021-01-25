@@ -118,11 +118,6 @@ export default [
                     component: './list/modals',
                   },
                   {
-                    name: '卡片列表',
-                    path: '/list/cards',
-                    component: './list/cards',
-                  },
-                  {
                     name: '详情列表',
                     path: '/list/details',
                     component: './list/details',
