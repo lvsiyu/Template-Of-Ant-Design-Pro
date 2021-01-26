@@ -1,19 +1,34 @@
-/* import * as personnelServices from '../service/index';
+import * as modalListService from '../service/index';
 
-const ChartsModel = {
-  namespace: 'car',
+const ModalListModel = {
+  namespace: 'modalList',
   state: {
-    personnelData: null,
+    modalListData: null,
+    modalData: null,
   },
   effects: {
-    *queryLine(_, { call, put }) {
-      const resp = yield call(personnelServices.queryPersonnel);
-      yield put({
-        type: 'saveData',
-        payload: {
-          personnelData: resp.data || {},
-        },
-      });
+    *queryModalListData({ payload }, { call, put }) {
+      if (payload) {
+        const { value, callback } = payload;
+        const resp = yield call(modalListService.queryModalListData, value);
+        yield put({
+          type: 'saveData',
+          payload: {
+            modalData: resp || null,
+          },
+        });
+        if (resp && callback) {
+          callback();
+        }
+      } else {
+        const resp = yield call(modalListService.queryModalListData);
+        yield put({
+          type: 'saveData',
+          payload: {
+            modalListData: resp || null,
+          },
+        });
+      }
     },
   },
   reducers: {
@@ -22,4 +37,4 @@ const ChartsModel = {
     },
   },
 };
-export default ChartsModel; */
+export default ModalListModel;
