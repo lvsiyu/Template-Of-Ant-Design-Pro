@@ -168,9 +168,9 @@ export default [
                     component: './card/basis',
                   },
                   {
-                    name: '弹框卡片',
-                    path: '/card/modals',
-                    component: './card/modals',
+                    name: '分步卡片',
+                    path: '/card/step',
+                    component: './card/step',
                   },
                   {
                     name: '交互卡片',
