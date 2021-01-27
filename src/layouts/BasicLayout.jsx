@@ -11,6 +11,7 @@ import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
+import { companyText, removeDefaultFooterPage } from '@/utils/common';
 import logo from '../assets/logo.svg';
 
 const noMatch = (
@@ -38,17 +39,17 @@ const menuDataRender = (menuList) =>
     return Authorized.check(item.authority, localItem, null);
   });
 
-const defaultFooterDom = (
-  <DefaultFooter
-    copyright={false}
-    links={[
-      {
-        key: '1',
-        title: '技术支持: xxxxxxxx有限公司',
-      },
-    ]}
-  />
-);
+const defaultFooterDom = (location) => {
+  const { pathname } = location;
+  if (pathname && removeDefaultFooterPage && removeDefaultFooterPage.length > 0) {
+    for (let i = 0; i < removeDefaultFooterPage.length; i += 1) {
+      if (pathname === removeDefaultFooterPage[i]) {
+        return false;
+      }
+    }
+  }
+  return <DefaultFooter copyright={false} links={[{ key: '1', title: companyText }]} />;
+};
 
 const BasicLayout = (props) => {
   const {
@@ -67,7 +68,7 @@ const BasicLayout = (props) => {
         type: 'user/fetchCurrent',
       });
     }
-  }, []);
+  }, [dispatch]);
   /**
    * init variables
    */
@@ -117,7 +118,7 @@ const BasicLayout = (props) => {
           <span>{route.breadcrumbName}</span>
         );
       }}
-      footerRender={() => defaultFooterDom}
+      footerRender={() => defaultFooterDom(location)}
       menuDataRender={menuDataRender}
       rightContentRender={() => <RightContent />}
       postMenuData={(menuData) => {
