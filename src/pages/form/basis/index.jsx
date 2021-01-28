@@ -14,6 +14,10 @@ import ProForm, {
   ProFormDigit,
   ProFormTextArea,
   ProFormCheckbox,
+  ProFormTimePicker,
+  ProFormSwitch,
+  ProFormRate,
+  ProFormSlider,
 } from '@ant-design/pro-form';
 
 const waitTime = (time = 100) => {
@@ -67,39 +71,62 @@ const BasisForm = (props) => {
                 rules={[{ required: true, message: '请输入内容!' }]}
               />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormText width="xs" name="text2" label="104长度的输入框" placeholder="请输入" />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormText width="sm" name="text3" label="216长度的输入框" placeholder="请输入" />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormText width="md" name="text4" label="328长度的输入框" placeholder="请输入" />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormText width="lg" name="text5" label="440长度的输入框" placeholder="请输入" />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormText width="xl" name="text6" label="552长度的输入框" placeholder="请输入" />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormDigit width="md" name="num" label="数字输入框" initialValue={5} />
             </ProForm.Group>
+
             <ProFormText name="text7" label="未限制长度的输入框" placeholder="请输入" />
+
+            <ProFormTextArea label="文本框" name="textarea" />
           </ProCard>
           <ProCard bordered headerBordered title="选择框">
             <ProForm.Group>
               <ProFormDatePicker width="md" name="datepicker" label="日期选择框" />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormDateRangePicker width="md" name="rangepicker" label="日期范围选择框" />
             </ProForm.Group>
+
             <ProForm.Group>
-              <ProFormSelect
-                options={[{ value: 'chapter', label: '选项1' }]}
+              <ProFormTimePicker width="md" name="timepicker" label="时间选择框" />
+            </ProForm.Group>
+
+            <ProForm.Group>
+              <ProFormSwitch name="switch" label="开关" />
+            </ProForm.Group>
+
+            <ProForm.Group>
+              <ProFormRate width="md" name="rate" label="评分" />
+            </ProForm.Group>
+
+            <ProForm.Group>
+              <ProFormSlider
                 width="md"
-                name="select"
-                label="下拉选择框"
+                name="slider"
+                label="滑动输入条"
+                marks={{ 0: 'A', 20: 'B', 40: 'C', 60: 'D', 80: 'E', 100: 'F' }}
               />
             </ProForm.Group>
 
@@ -108,10 +135,11 @@ const BasisForm = (props) => {
                 initialValue="option1"
                 options={[{ value: 'option1', label: '选项1' }]}
                 width="md"
-                name="initialselect"
-                label="带默认值的下拉选择框"
+                name="select"
+                label="下拉选择框"
               />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormRadio.Group
                 label="单选框"
@@ -120,6 +148,7 @@ const BasisForm = (props) => {
                 options={['单选1', '单选2', '单选3']}
               />
             </ProForm.Group>
+
             <ProForm.Group>
               <ProFormCheckbox.Group
                 label="多选框"
@@ -127,13 +156,13 @@ const BasisForm = (props) => {
                 options={['多选1', '多选2', '多选3']}
               />
             </ProForm.Group>
+
             <ProFormUploadButton
               extra="支持扩展名：.jpg .zip .doc .wps"
-              label="倒签报备附件"
+              label="上传文件"
               name="file"
               title="上传文件"
             />
-            <ProFormTextArea width="xl" label="合同备注说明" name="remark" />
           </ProCard>
         </ProCard>
       </ProForm>
