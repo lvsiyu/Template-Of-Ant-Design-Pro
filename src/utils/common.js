@@ -2,7 +2,7 @@
 const companyText = '技术支持: xxxxxxxx有限公司';
 
 /* 需要去除版权号的页面的路由名称 */
-const removeDefaultFooterPage = ['/form/basis'];
+const removeDefaultFooterPage = ['/form/basis', '/form/steps'];
 
 /* 根据传入text匹配数组对象中相同label的value */
 const fillKeyValues = (text, arr) => {

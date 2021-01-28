@@ -203,6 +203,11 @@ export default [
                     component: './form/modals',
                   },
                   {
+                    name: '分步表单',
+                    path: '/form/steps',
+                    component: './form/steps',
+                  },
+                  {
                     name: '高级表单',
                     path: '/form/pro',
                     component: './form/pro',

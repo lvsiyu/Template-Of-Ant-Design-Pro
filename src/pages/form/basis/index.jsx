@@ -141,6 +141,23 @@ const BasisForm = (props) => {
             </ProForm.Group>
 
             <ProForm.Group>
+              <ProFormSelect
+                initialValue={['option1', 'option2']}
+                fieldProps={{
+                  mode: 'tags',
+                }}
+                options={[
+                  { value: 'option1', label: '选项1' },
+                  { value: 'option2', label: '选项2' },
+                  { value: 'option3', label: '选项3' },
+                ]}
+                width="md"
+                name="select"
+                label="下拉多选框"
+              />
+            </ProForm.Group>
+
+            <ProForm.Group>
               <ProFormRadio.Group
                 label="单选框"
                 name="radio"
