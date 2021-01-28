@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'umi';
 import { message } from 'antd';
 import { FooterToolbar, PageContainer } from '@ant-design/pro-layout';
 import ProCard from '@ant-design/pro-card';
@@ -24,7 +26,23 @@ const basisFormFooter = (_, dom) => {
   return <FooterToolbar>{dom}</FooterToolbar>;
 };
 
-const BasisForm = () => {
+const BasisForm = (props) => {
+  const { dispatch } = props;
+
+  const submitFormSuccess = () => {
+    message.success('提交成功');
+  };
+
+  const submitForm = (values) => {
+    dispatch({
+      type: 'basisForm/queryBasisFormData',
+      payload: {
+        value: values,
+        callback: submitFormSuccess,
+      },
+    });
+  };
+
   return (
     <PageContainer>
       <ProCard>
@@ -34,8 +52,7 @@ const BasisForm = () => {
           }}
           onFinish={async (values) => {
             await waitTime(2000);
-            console.log(values);
-            message.success('提交成功');
+            submitForm(values);
           }}
         >
           <ProForm.Group>
@@ -129,4 +146,10 @@ const BasisForm = () => {
   );
 };
 
-export default BasisForm;
+export default connect(({ basisForm }) => ({
+  queryBasisFormData: basisForm.queryBasisFormData,
+}))(BasisForm);
+
+BasisForm.propTypes = {
+  dispatch: PropTypes.any,
+};
