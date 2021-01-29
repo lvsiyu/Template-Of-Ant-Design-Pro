@@ -1,19 +1,30 @@
-/* import * as personnelServices from '../service/index';
+import * as stepsFormService from '../service/index';
 
-const ChartsModel = {
-  namespace: 'car',
+const StepsModel = {
+  namespace: 'stepsForm',
   state: {
-    personnelData: null,
+    step1Status: false,
   },
   effects: {
-    *queryLine(_, { call, put }) {
-      const resp = yield call(personnelServices.queryPersonnel);
+    *queryStepsFormData({ payload }, { call }) {
+      const { value, callback } = payload;
+      const resp = yield call(stepsFormService.queryStepsFormData, value);
+      if (resp && callback) {
+        callback();
+      }
+    },
+    *querySteps1({ payload }, { call, put }) {
+      const { value, callback } = payload;
+      const resp = yield call(stepsFormService.queryStepsFormData, value);
       yield put({
         type: 'saveData',
         payload: {
-          personnelData: resp.data || {},
+          step1Status: resp.data || {},
         },
       });
+      if (resp && callback) {
+        callback(resp);
+      }
     },
   },
   reducers: {
@@ -22,4 +33,4 @@ const ChartsModel = {
     },
   },
 };
-export default ChartsModel; */
+export default StepsModel;

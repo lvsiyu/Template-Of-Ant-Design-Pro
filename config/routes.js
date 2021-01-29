@@ -208,6 +208,11 @@ export default [
                     component: './form/steps',
                   },
                   {
+                    name: '登录表单',
+                    path: '/form/login',
+                    component: './form/login',
+                  },
+                  {
                     name: '高级表单',
                     path: '/form/pro',
                     component: './form/pro',

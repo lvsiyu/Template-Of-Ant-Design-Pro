@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'umi';
 import { FooterToolbar, PageContainer } from '@ant-design/pro-layout';
 import ProForm, {
   StepsForm,
@@ -24,7 +26,44 @@ const basisFormFooter = (_, dom) => {
   return <FooterToolbar>{dom}</FooterToolbar>;
 };
 
-const StepsFormPage = () => {
+const StepsFormPage = (props) => {
+  const { dispatch, step1Status } = props;
+  console.log(step1Status);
+
+  const submitFormSuccess = () => {
+    message.success('提交成功');
+  };
+
+  const submitStep1 = async (values) => {
+    let status = false;
+    await waitTime(2000);
+    await dispatch({
+      type: 'stepsForm/querySteps1',
+      payload: {
+        value: values,
+        callback: (resp) => {
+          if (resp.code === 0) {
+            message.success('提交成功');
+            status = true;
+          } else {
+            message.error('提交失败');
+            status = false;
+          }
+        },
+      },
+    });
+    return status;
+  };
+
+  const submitForm = (values) => {
+    dispatch({
+      type: 'stepsForm/queryBasisFormData',
+      payload: {
+        value: values,
+        callback: submitFormSuccess,
+      },
+    });
+  };
   return (
     <PageContainer>
       <ProCard>
@@ -33,9 +72,8 @@ const StepsFormPage = () => {
             render: (_, dom) => basisFormFooter(_, dom),
           }}
           onFinish={async (values) => {
-            console.log(values);
-            await waitTime(1000);
-            message.success('提交成功');
+            await waitTime(2000);
+            await submitForm(values);
           }}
           formProps={{
             validateMessages: {
@@ -46,10 +84,7 @@ const StepsFormPage = () => {
           <StepsForm.StepForm
             name="base"
             title="第一步骤"
-            onFinish={async () => {
-              await waitTime(2000);
-              return true;
-            }}
+            onFinish={(values) => submitStep1(values)}
           >
             <ProCard
               title="源和目标"
@@ -193,4 +228,12 @@ const StepsFormPage = () => {
   );
 };
 
-export default StepsFormPage;
+export default connect(({ stepsForm }) => ({
+  queryBasisFormData: stepsForm.queryBasisFormData,
+  step1Status: stepsForm.step1Status,
+}))(StepsFormPage);
+
+StepsFormPage.propTypes = {
+  dispatch: PropTypes.any,
+  step1Status: PropTypes.any,
+};
