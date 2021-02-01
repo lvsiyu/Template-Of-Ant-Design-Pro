@@ -1,7 +1,7 @@
 import request from '@/utils/request';
 
-export async function queryCar(params) {
-  return request('/mock/car', {
+export async function queryFormList(params) {
+  return request('/mock/formTableList', {
     params,
   });
 }
