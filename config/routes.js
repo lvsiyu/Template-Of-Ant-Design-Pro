@@ -213,9 +213,9 @@ export default [
                     component: './form/login',
                   },
                   {
-                    name: '高级表单',
-                    path: '/form/pro',
-                    component: './form/pro',
+                    name: '筛选表单',
+                    path: '/form/fill',
+                    component: './form/fill',
                   },
                   {
                     component: './404',
