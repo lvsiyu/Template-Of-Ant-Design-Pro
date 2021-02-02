@@ -18,9 +18,9 @@ const ActionCard = () => {
                 <EllipsisOutlined key="ellipsis" />,
               ]}
             >
-              <div>Card content</div>
-              <div>Card content</div>
-              <div>Card content</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
             </ProCard>
             <ProCard
               title="Actions1 操作项"
@@ -31,9 +31,9 @@ const ActionCard = () => {
                 <EllipsisOutlined key="ellipsis" />,
               ]}
             >
-              <div>Card content</div>
-              <div>Card content</div>
-              <div>Card content</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
             </ProCard>
             <ProCard
               title="Actions1 操作项"
@@ -44,9 +44,9 @@ const ActionCard = () => {
                 <EllipsisOutlined key="ellipsis" />,
               ]}
             >
-              <div>Card content</div>
-              <div>Card content</div>
-              <div>Card content</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
             </ProCard>
             <ProCard
               title="Actions1 操作项"
@@ -57,9 +57,9 @@ const ActionCard = () => {
                 <EllipsisOutlined key="ellipsis" />,
               ]}
             >
-              <div>Card content</div>
-              <div>Card content</div>
-              <div>Card content</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
             </ProCard>
           </ProCard>
         </ProCard.TabPane>
@@ -74,9 +74,9 @@ const ActionCard = () => {
                 <EllipsisOutlined key="ellipsis" />,
               ]}
             >
-              <div>Card content</div>
-              <div>Card content</div>
-              <div>Card content</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
             </ProCard>
             <ProCard
               title="Actions2 操作项"
@@ -87,9 +87,9 @@ const ActionCard = () => {
                 <EllipsisOutlined key="ellipsis" />,
               ]}
             >
-              <div>Card content</div>
-              <div>Card content</div>
-              <div>Card content</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
             </ProCard>
             <ProCard
               title="Actions2 操作项"
@@ -100,9 +100,9 @@ const ActionCard = () => {
                 <EllipsisOutlined key="ellipsis" />,
               ]}
             >
-              <div>Card content</div>
-              <div>Card content</div>
-              <div>Card content</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
             </ProCard>
             <ProCard
               title="Actions2 操作项"
@@ -113,9 +113,9 @@ const ActionCard = () => {
                 <EllipsisOutlined key="ellipsis" />,
               ]}
             >
-              <div>Card content</div>
-              <div>Card content</div>
-              <div>Card content</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
+              <div>我是内容我是内容</div>
             </ProCard>
           </ProCard>
         </ProCard.TabPane>
