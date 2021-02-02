@@ -1,3 +1,6 @@
-import QuickSearch from './QuickSearch';
+import NormalSearch from './NormalSearch';
+import VerticalSearch from './VerticalSearch';
+import LightSearch from './LightSearch';
+import LightSearchSmall from './LightSearchSmall';
 
-export { QuickSearch };
+export { NormalSearch, VerticalSearch, LightSearch, LightSearchSmall };
