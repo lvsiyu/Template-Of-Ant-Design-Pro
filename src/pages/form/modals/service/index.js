@@ -5,3 +5,10 @@ export async function queryFormList(params) {
     params,
   });
 }
+
+export async function queryModalForm(params) {
+  return request('/mock/formRequest', {
+    method: 'POST',
+    data: params,
+  });
+}

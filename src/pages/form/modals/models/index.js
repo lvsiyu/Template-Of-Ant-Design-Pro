@@ -1,19 +1,15 @@
-/* import * as personnelServices from '../service/index';
+import * as modalFormServices from '../service/index';
 
-const ChartsModel = {
-  namespace: 'car',
-  state: {
-    personnelData: null,
-  },
+const ModalFormModel = {
+  namespace: 'modalFormModel',
+  state: {},
   effects: {
-    *queryLine(_, { call, put }) {
-      const resp = yield call(personnelServices.queryPersonnel);
-      yield put({
-        type: 'saveData',
-        payload: {
-          personnelData: resp.data || {},
-        },
-      });
+    *queryModalForm({ payload }, { call }) {
+      const { value, callback } = payload;
+      const resp = yield call(modalFormServices.queryModalForm, value);
+      if (resp && callback && resp.code === 0) {
+        callback(resp);
+      }
     },
   },
   reducers: {
@@ -22,4 +18,4 @@ const ChartsModel = {
     },
   },
 };
-export default ChartsModel; */
+export default ModalFormModel;
