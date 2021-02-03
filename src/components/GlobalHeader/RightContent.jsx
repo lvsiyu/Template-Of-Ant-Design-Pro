@@ -28,8 +28,8 @@ const GlobalHeaderRight = (props) => {
         placeholder="站内搜索(请输入关键字搜索)"
         options={[
           {
-            label: <a href="#">市域管控平台</a>,
-            value: '市域管控平台',
+            label: <a href="#">默认搜索内容</a>,
+            value: '默认搜索内容',
           },
         ]} // onSearch={value => {
         //   //console.log('input', value);
