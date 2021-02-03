@@ -25,8 +25,8 @@ const mobileMenu = (
 
 const ProDetailHeaderExtra = (
   <div className={styles.moreInfo}>
-    <Statistic title="状态" value="待审批" />
-    <Statistic title="订单金额" value={568.08} prefix="¥" />
+    <Statistic title="大小标题" value="大小内容1" />
+    <Statistic title="大小金额" value={568.08} prefix="¥" />
   </div>
 );
 
@@ -34,14 +34,14 @@ const ProDetailHeaderDescription = (
   <RouteContext.Consumer>
     {({ isMobile }) => (
       <Descriptions className={styles.headerList} size="small" column={isMobile ? 1 : 2}>
-        <Descriptions.Item label="创建人">曲丽丽</Descriptions.Item>
-        <Descriptions.Item label="订购产品">XX 服务</Descriptions.Item>
-        <Descriptions.Item label="创建时间">2017-07-07</Descriptions.Item>
-        <Descriptions.Item label="关联单据">
-          <a href="">12421</a>
+        <Descriptions.Item label="标题1">标题1</Descriptions.Item>
+        <Descriptions.Item label="标题2">标题2</Descriptions.Item>
+        <Descriptions.Item label="时间标题">2017-07-07</Descriptions.Item>
+        <Descriptions.Item label="操作标题">
+          <a href="">操作内容</a>
         </Descriptions.Item>
-        <Descriptions.Item label="生效日期">2017-07-07 ~ 2017-08-08</Descriptions.Item>
-        <Descriptions.Item label="备注">请于两个工作日内确认</Descriptions.Item>
+        <Descriptions.Item label="时间范围">2017-07-07 ~ 2017-08-08</Descriptions.Item>
+        <Descriptions.Item label="备注标题">备注标题备注标题备注标题备注标题</Descriptions.Item>
       </Descriptions>
     )}
   </RouteContext.Consumer>
