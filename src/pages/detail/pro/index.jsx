@@ -1,85 +1,32 @@
-/* import { Divider } from 'antd'; */
-import React /* , { Fragment } */ from 'react';
+import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import ProTable from '@ant-design/pro-table';
-import { selectStationValue } from '@/utils/dictionary';
-import { queryCar } from './service/index';
+import {
+  ProDetailHeaderExtra,
+  ProDetailHeaderDescription,
+  ProDetailHeaderAction,
+  DetailTabs1,
+  DetailTabs2,
+} from './component/index';
+import styles from './style/index.less';
 
-const ActionDetail = () => {
-  const columns = [
-    {
-      title: '单位名称',
-      dataIndex: 'name',
-      valueType: 'input',
-    },
-    {
-      title: '单位类型',
-      dataIndex: 'type',
-      search: false,
-    },
-    {
-      title: '单位地址',
-      dataIndex: 'address',
-      valueType: 'input',
-    },
-    {
-      title: '采集时间',
-      dataIndex: 'time',
-      search: false,
-    },
-    {
-      title: '采集派出所',
-      dataIndex: 'station',
-      valueType: 'select',
-      valueEnum: selectStationValue,
-    },
-    {
-      title: '采集人',
-      dataIndex: 'collectionPeople',
-      search: false,
-    },
-    {
-      title: '采集开始时间',
-      dataIndex: 'collectionStartTime',
-      hideInTable: true,
-      valueType: 'dateTime',
-    },
-    {
-      title: '采集结束时间',
-      dataIndex: 'collectionEndTime',
-      hideInTable: true,
-      valueType: 'dateTime',
-    },
-    /* {
-      title: '操作',
-      dataIndex: 'option',
-      valueType: 'option',
-      render: () => (
-        <Fragment>
-          <a>操作</a>
-          <Divider type="vertical" />
-          <a>操作</a>
-        </Fragment>
-      ),
-    }, */
-  ];
+const ProDetailPage = () => {
+  const [tabActiveKey, setTabActiveKey] = useState('tabs1');
   return (
-    <PageContainer>
-      <ProTable
-        rowKey="id"
-        search={{
-          labelWidth: 120,
-        }}
-        bordered
-        pagination={{
-          showQuickJumper: true,
-        }}
-        headerTitle="暂未开发"
-        request={(params) => queryCar({ ...params })}
-        columns={columns}
-      />
+    <PageContainer
+      extra={ProDetailHeaderAction}
+      className={styles.pageHeader}
+      content={ProDetailHeaderDescription}
+      extraContent={ProDetailHeaderExtra}
+      tabActiveKey={tabActiveKey}
+      onTabChange={(value) => setTabActiveKey(value)}
+      tabList={[
+        { key: 'tabs1', tab: '选项卡1' },
+        { key: 'tabs2', tab: '选项卡2' },
+      ]}
+    >
+      {tabActiveKey === 'tabs1' ? <DetailTabs1 /> : <DetailTabs2 />}
     </PageContainer>
   );
 };
 
-export default ActionDetail;
+export default ProDetailPage;
