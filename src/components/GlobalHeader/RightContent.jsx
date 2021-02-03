@@ -1,8 +1,8 @@
-import { Tooltip, Tag } from 'antd';
+import { Tooltip, Tag, message } from 'antd';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'umi';
+import { connect, Link } from 'umi';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
@@ -25,15 +25,40 @@ const GlobalHeaderRight = (props) => {
     <div className={className}>
       <HeaderSearch
         className={`${styles.action} ${styles.search}`}
-        placeholder="站内搜索(请输入关键字搜索)"
+        placeholder="站内搜索(请输入关键字回车搜索)"
         options={[
           {
-            label: <a href="#">默认搜索内容</a>,
-            value: '默认搜索内容',
+            label: <Link to="/visualization/basis">可视化数据</Link>,
+            value: '可视化数据',
           },
-        ]} // onSearch={value => {
-        //   //console.log('input', value);
-        // }}
+          {
+            label: <Link to="/table/basis">表格模板</Link>,
+            value: '表格模板',
+          },
+          {
+            label: <Link to="/list/basis">列表模板</Link>,
+            value: '列表模板',
+          },
+          {
+            label: <Link to="/detail/basis">详情模板</Link>,
+            value: '详情模板',
+          },
+          {
+            label: <Link to="/card/basis">卡片模板</Link>,
+            value: '卡片模板',
+          },
+          {
+            label: <Link to="/form/basis">表单模板</Link>,
+            value: '表单模板',
+          },
+          {
+            label: <Link to="/setting/user">用户中心</Link>,
+            value: '用户中心',
+          },
+        ]}
+        onSearch={(value) => {
+          message.success(`搜索内容为: ${value}`);
+        }}
       />
       <Tooltip title="使用文档">
         <a
