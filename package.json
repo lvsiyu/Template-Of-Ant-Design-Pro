@@ -53,6 +53,7 @@
     "@ant-design/pro-list": "^1.1.14",
     "@ant-design/pro-table": "^2.27.2",
     "@ant-design/pro-card":"^1.9.12",
+    "@ant-design/pro-skeleton":"^1.0.0",
     "@antv/l7": "^2.3.3",
     "@antv/l7-react": "^2.3.0",
     "@umijs/route-utils": "^1.0.33",
