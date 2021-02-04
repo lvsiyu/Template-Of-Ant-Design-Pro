@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { RouteContext } from '@ant-design/pro-layout';
 import { Steps, Popconfirm, message } from 'antd';
-import moment from 'moment';
 import classNames from 'classnames';
 import styles from '../../style/index.less';
 
 const { Step } = Steps;
 
-const DetailSteps1 = () => {
+const DetailSteps1 = (props) => {
+  const { stepData } = props;
   const confirm = () => {
     message.success('简易操作了一波');
   };
@@ -16,37 +17,50 @@ const DetailSteps1 = () => {
     message.error('取消操作了一波');
   };
 
-  const desc1 = (
-    <div className={classNames(styles.textSecondary, styles.stepDescription)}>
-      <Fragment>操作人1</Fragment>
-      <div>{moment(new Date()).format('YYYY-MM-DD HH:mm')}</div>
-    </div>
-  );
-
-  const desc2 = (
-    <div className={styles.stepDescription}>
-      <Fragment>操作人2</Fragment>
-      <div>
-        <Popconfirm
-          title="是否确认该操作"
-          onConfirm={confirm}
-          onCancel={cancel}
-          okText="是"
-          cancelText="否"
-        >
-          <a>简易操作</a>
-        </Popconfirm>
+  const description = (value, index) => {
+    return (
+      <div
+        className={
+          stepData.current === index
+            ? styles.stepDescription
+            : classNames(styles.textSecondary, styles.stepDescription)
+        }
+      >
+        {value.name ? <Fragment>{value.name}</Fragment> : null}
+        {value.time ? <div>{value.time}</div> : null}
+        {value.action ? (
+          <div>
+            <Popconfirm
+              title="是否确认该操作"
+              onConfirm={confirm}
+              onCancel={cancel}
+              okText="是"
+              cancelText="否"
+            >
+              <a>{value.action}</a>
+            </Popconfirm>
+          </div>
+        ) : null}
       </div>
-    </div>
-  );
+    );
+  };
   return (
     <RouteContext.Consumer>
       {({ isMobile }) => (
-        <Steps direction={isMobile ? 'vertical' : 'horizontal'} current={1} percent={60}>
-          <Step title="第一步骤" description={desc1} />
-          <Step title="第二步骤" description={desc2} />
-          <Step title="第三步骤" />
-          <Step title="完成步骤" />
+        <Steps
+          direction={isMobile ? 'vertical' : 'horizontal'}
+          current={stepData.current}
+          percent={stepData.percent}
+        >
+          {stepData.stepContent &&
+            stepData.stepContent.length > 0 &&
+            stepData.stepContent.map((item, index) => (
+              <Step
+                key={`${index + 1}`}
+                title={item.title}
+                description={description(item, index)}
+              />
+            ))}
         </Steps>
       )}
     </RouteContext.Consumer>
@@ -54,3 +68,7 @@ const DetailSteps1 = () => {
 };
 
 export default DetailSteps1;
+
+DetailSteps1.propTypes = {
+  stepData: PropTypes.any,
+};

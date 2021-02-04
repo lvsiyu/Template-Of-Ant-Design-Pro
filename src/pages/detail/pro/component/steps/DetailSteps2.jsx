@@ -1,13 +1,14 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { RouteContext } from '@ant-design/pro-layout';
 import { Steps, Popover, Badge, Popconfirm, message } from 'antd';
-import moment from 'moment';
 import classNames from 'classnames';
 import styles from '../../style/index.less';
 
 const { Step } = Steps;
 
-const DetailSteps2 = () => {
+const DetailSteps2 = (props) => {
+  const { stepData } = props;
   const confirm = () => {
     message.success('简易操作了一波');
   };
@@ -16,40 +17,21 @@ const DetailSteps2 = () => {
     message.error('取消操作了一波');
   };
 
-  const desc1 = (
-    <div className={classNames(styles.textSecondary, styles.stepDescription)}>
-      <Fragment>操作人1</Fragment>
-      <div>{moment(new Date()).format('YYYY-MM-DD HH:mm')}</div>
-    </div>
-  );
-  const desc2 = (
-    <div className={styles.stepDescription}>
-      <Fragment>操作人2</Fragment>
-      <div>
-        <Popconfirm
-          title="是否确认该操作"
-          onConfirm={confirm}
-          onCancel={cancel}
-          okText="是"
-          cancelText="否"
-        >
-          <a>简易操作</a>
-        </Popconfirm>
-      </div>
-    </div>
-  );
-
   const popoverContent = (
     <div style={{ width: 160 }}>
-      操作人2
+      {stepData.people ? stepData.people : '暂无操作人'}
       <span className={styles.textSecondary} style={{ float: 'right' }}>
         <Badge
-          status="default"
-          text={<span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>未响应状态</span>}
+          status={stepData.status ? stepData.status : '暂无状态'}
+          text={
+            <span style={{ color: 'rgba(0, 0, 0, 0.45)' }}>
+              {stepData.statusName ? stepData.statusName : '暂无状态名称'}
+            </span>
+          }
         />
       </span>
       <div className={styles.textSecondary} style={{ marginTop: 4 }}>
-        耗时：2小时25分钟
+        耗时：{stepData.costTime ? stepData.costTime : '暂无耗时'}
       </div>
     </div>
   );
@@ -65,14 +47,47 @@ const DetailSteps2 = () => {
     return dot;
   };
 
+  const description = (value, index) => {
+    return (
+      <div
+        className={
+          stepData.current === index
+            ? styles.stepDescription
+            : classNames(styles.textSecondary, styles.stepDescription)
+        }
+      >
+        {value.name ? <Fragment>{value.name}</Fragment> : null}
+        {value.time ? <div>{value.time}</div> : null}
+        {value.action ? (
+          <div>
+            <Popconfirm
+              title="是否确认该操作"
+              onConfirm={confirm}
+              onCancel={cancel}
+              okText="是"
+              cancelText="否"
+            >
+              <a>{value.action}</a>
+            </Popconfirm>
+          </div>
+        ) : null}
+      </div>
+    );
+  };
+
   return (
     <RouteContext.Consumer>
       {({ isMobile }) => (
         <Steps direction={isMobile ? 'vertical' : 'horizontal'} progressDot={customDot} current={1}>
-          <Step title="创建项目" description={desc1} />
-          <Step title="部门初审" description={desc2} />
-          <Step title="财务复核" />
-          <Step title="完成" />
+          {stepData.stepContent &&
+            stepData.stepContent.length > 0 &&
+            stepData.stepContent.map((item, index) => (
+              <Step
+                key={`${index + 1}`}
+                title={item.title}
+                description={description(item, index)}
+              />
+            ))}
         </Steps>
       )}
     </RouteContext.Consumer>
@@ -80,3 +95,7 @@ const DetailSteps2 = () => {
 };
 
 export default DetailSteps2;
+
+DetailSteps2.propTypes = {
+  stepData: PropTypes.any,
+};
