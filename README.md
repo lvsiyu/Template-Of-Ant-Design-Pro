@@ -25,7 +25,7 @@ npm install -g yarn
 git clone xxx
 ```
 
-## 项目安装及构建
+## 项目安装及构建 
 当项目已经克隆成功后需要安装项目运行的依赖项（node_modules），找到项目，进入项目根目录，使用命令
 
 ```bash
