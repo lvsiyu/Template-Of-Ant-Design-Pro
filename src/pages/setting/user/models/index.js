@@ -1,4 +1,4 @@
-import * as personnelServices from '../service/index';
+/* import * as personnelServices from '../service/index';
 
 const ChartsModel = {
   namespace: 'userInfo',
@@ -23,3 +23,4 @@ const ChartsModel = {
   },
 };
 export default ChartsModel;
+ */
