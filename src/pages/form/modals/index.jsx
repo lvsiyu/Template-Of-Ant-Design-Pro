@@ -2,7 +2,6 @@ import React, { Fragment, useState } from 'react';
 import { Space } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProTable from '@ant-design/pro-table';
-import { selectStationValue } from '@/utils/dictionary';
 import { queryFormList } from './service/index';
 import { ModalsFormNormal, ModalsFormDrawer } from './modals/index';
 
@@ -61,7 +60,6 @@ const ModalsForm = () => {
     {
       title: '备注',
       dataIndex: 'discription',
-      valueEnum: selectStationValue,
       search: false,
       ellipsis: true,
     },
