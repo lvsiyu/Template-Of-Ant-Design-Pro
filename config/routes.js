@@ -138,16 +138,6 @@ export default [
                     component: './detail/basis',
                   },
                   {
-                    name: '弹框详情',
-                    path: '/detail/modals',
-                    component: './detail/modals',
-                  },
-                  {
-                    name: '分页详情',
-                    path: '/detail/tabs',
-                    component: './detail/tabs',
-                  },
-                  {
                     name: '高级详情',
                     path: '/detail/pro',
                     component: './detail/pro',
