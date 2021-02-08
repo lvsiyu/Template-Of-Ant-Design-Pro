@@ -97,6 +97,64 @@ const getProfileBasicData = {
   msg: 'success',
 };
 
+const detailList1 = {
+  code: 0,
+  data: [],
+  msg: 'success',
+};
+
+const detailList2 = {
+  code: 0,
+  data: [],
+  msg: 'success',
+};
+
+const detailList3 = {
+  code: 0,
+  data: [],
+  msg: 'success',
+};
+
+const detailList4 = {
+  code: 0,
+  data: [],
+  msg: 'success',
+};
+
+for (let i = 0; i < 25; i += 1) {
+  detailList1.data.push({
+    name: `名称1-${i}`,
+    content1: '短一点的内容1',
+    content2: '2020-02-05 14:24',
+    content3: '长一点的内容长一点的内容长一点的内容长一点的内容长一点的内容长一点的内容',
+  });
+
+  detailList2.data.push({
+    name: `名称2-${i}`,
+    content1: '短一点的内容1',
+    content2: '2020-02-05 14:24',
+    content3: '长一点的内容长一点的内容长一点的内容长一点的内容长一点的内容长一点的内容',
+  });
+
+  detailList3.data.push({
+    name: `名称3-${i}`,
+    content1: '短一点的内容1',
+    content2: '2020-02-05 14:24',
+    content3: '长一点的内容长一点的内容长一点的内容长一点的内容长一点的内容长一点的内容',
+  });
+
+  detailList4.data.push({
+    name: `名称4-${i}`,
+    content1: '短一点的内容1',
+    content2: '2020-02-05 14:24',
+    content3: '长一点的内容长一点的内容长一点的内容长一点的内容长一点的内容长一点的内容',
+  });
+}
+
 export default {
   'GET  /mock/details/basic': getProfileBasicData,
+  'GET  /mock/details/list1': detailList1,
+  'GET  /mock/details/list2': detailList2,
+  'GET  /mock/details/list3': detailList3,
+  'GET  /mock/details/list4': detailList4,
 };
