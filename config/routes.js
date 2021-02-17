@@ -43,6 +43,11 @@ export default [
                     component: './visualization/modals',
                   },
                   {
+                    name: '使用Echarts',
+                    path: '/visualization/echarts',
+                    component: './visualization/echarts',
+                  },
+                  {
                     component: './404',
                   },
                 ],
