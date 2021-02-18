@@ -5,11 +5,17 @@ import ProCard from '@ant-design/pro-card';
 import { Lines, Sunbursts } from './components/index';
 import styles from './index.less';
 
+const uri = (
+  <a href="https://echarts.apache.org/examples/zh/index.html" target="_blank" rel="noreferrer">
+    更多示例
+  </a>
+);
+
 const VisualizationForEcharts = () => {
   return (
     <PageContainer title="使用Echarts创建基本图表">
       <ProCard direction="column" ghost gutter={[0, 16]}>
-        <ProCard title="折线图" headerBordered>
+        <ProCard title="折线图" headerBordered extra={uri}>
           <Row gutter={[8, 8]}>
             <Col span={8}>
               <ProCard className={styles.card4} bordered headerBordered title="基础折线图">
@@ -28,7 +34,7 @@ const VisualizationForEcharts = () => {
             </Col>
           </Row>
         </ProCard>
-        <ProCard title="旭日图" headerBordered>
+        <ProCard title="旭日图" headerBordered extra={uri}>
           <Row gutter={[8, 8]}>
             <Col span={8}>
               <ProCard className={styles.card5} bordered headerBordered title="基础旭日图">
