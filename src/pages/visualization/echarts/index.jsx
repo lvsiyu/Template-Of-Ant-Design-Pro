@@ -1,271 +1,41 @@
 import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
+import { Row, Col } from 'antd';
 import ProCard from '@ant-design/pro-card';
-import ReactEcharts from 'echarts-for-react';
+import { Lines, Sunbursts } from './components/index';
 import styles from './index.less';
 
 const VisualizationForEcharts = () => {
-  const getOption = {
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [150, 230, 224, 218, 135, 147, 260],
-        type: 'line',
-      },
-    ],
-  };
-
-  const item1 = {
-    color: '#F54F4A',
-  };
-  const item2 = {
-    color: '#FF8C75',
-  };
-  const item3 = {
-    color: '#FFB499',
-  };
-
-  const data = [
-    {
-      children: [
-        {
-          value: 5,
-          children: [
-            {
-              value: 1,
-              itemStyle: item1,
-            },
-            {
-              value: 2,
-              children: [
-                {
-                  value: 1,
-                  itemStyle: item2,
-                },
-              ],
-            },
-            {
-              children: [
-                {
-                  value: 1,
-                },
-              ],
-            },
-          ],
-          itemStyle: item1,
-        },
-        {
-          value: 10,
-          children: [
-            {
-              value: 6,
-              children: [
-                {
-                  value: 1,
-                  itemStyle: item1,
-                },
-                {
-                  value: 1,
-                },
-                {
-                  value: 1,
-                  itemStyle: item2,
-                },
-                {
-                  value: 1,
-                },
-              ],
-              itemStyle: item3,
-            },
-            {
-              value: 2,
-              children: [
-                {
-                  value: 1,
-                },
-              ],
-              itemStyle: item3,
-            },
-            {
-              children: [
-                {
-                  value: 1,
-                  itemStyle: item2,
-                },
-              ],
-            },
-          ],
-          itemStyle: item1,
-        },
-      ],
-      itemStyle: item1,
-    },
-    {
-      value: 9,
-      children: [
-        {
-          value: 4,
-          children: [
-            {
-              value: 2,
-              itemStyle: item2,
-            },
-            {
-              children: [
-                {
-                  value: 1,
-                  itemStyle: item1,
-                },
-              ],
-            },
-          ],
-          itemStyle: item1,
-        },
-        {
-          children: [
-            {
-              value: 3,
-              children: [
-                {
-                  value: 1,
-                },
-                {
-                  value: 1,
-                  itemStyle: item2,
-                },
-              ],
-            },
-          ],
-          itemStyle: item3,
-        },
-      ],
-      itemStyle: item2,
-    },
-    {
-      value: 7,
-      children: [
-        {
-          children: [
-            {
-              value: 1,
-              itemStyle: item3,
-            },
-            {
-              value: 3,
-              children: [
-                {
-                  value: 1,
-                  itemStyle: item2,
-                },
-                {
-                  value: 1,
-                },
-              ],
-              itemStyle: item2,
-            },
-            {
-              value: 2,
-              children: [
-                {
-                  value: 1,
-                },
-                {
-                  value: 1,
-                  itemStyle: item1,
-                },
-              ],
-              itemStyle: item1,
-            },
-          ],
-          itemStyle: item3,
-        },
-      ],
-      itemStyle: item1,
-    },
-    {
-      children: [
-        {
-          value: 6,
-          children: [
-            {
-              value: 1,
-              itemStyle: item2,
-            },
-            {
-              value: 2,
-              children: [
-                {
-                  value: 2,
-                  itemStyle: item2,
-                },
-              ],
-              itemStyle: item1,
-            },
-            {
-              value: 1,
-              itemStyle: item3,
-            },
-          ],
-          itemStyle: item3,
-        },
-        {
-          value: 3,
-          children: [
-            {
-              value: 1,
-            },
-            {
-              children: [
-                {
-                  value: 1,
-                  itemStyle: item2,
-                },
-              ],
-            },
-            {
-              value: 1,
-            },
-          ],
-          itemStyle: item3,
-        },
-      ],
-      itemStyle: item1,
-    },
-  ];
-
-  const getOption2 = {
-    series: {
-      radius: ['15%', '80%'],
-      type: 'sunburst',
-      sort: null,
-      emphasis: {
-        focus: 'ancestor',
-      },
-      data,
-      label: {
-        rotate: 'radial',
-      },
-      levels: [],
-      itemStyle: {
-        color: '#ddd',
-        borderWidth: 2,
-      },
-    },
-  };
   return (
-    <PageContainer>
-      <ProCard title="基本图表" headerBordered gutter={16} style={{ marginTop: 20 }}>
-        <ProCard className={styles.card} bordered headerBordered title="折线图">
-          <ReactEcharts option={getOption} style={{ width: '100%', height: '100%' }} />
+    <PageContainer title="使用Echarts创建基本图表">
+      <ProCard direction="column" ghost gutter={[0, 16]}>
+        <ProCard title="折线图" headerBordered>
+          <Row gutter={[8, 8]}>
+            <Col span={8}>
+              <ProCard className={styles.card4} bordered headerBordered title="基础折线图">
+                <Lines.EchartsBasisLine />
+              </ProCard>
+            </Col>
+            <Col span={8}>
+              <ProCard className={styles.card4} bordered headerBordered title="平滑折线图">
+                <Lines.EchartsSmoothLine />
+              </ProCard>
+            </Col>
+            <Col span={8}>
+              <ProCard className={styles.card4} bordered headerBordered title="面积折线图">
+                <Lines.EchartsAreaLine />
+              </ProCard>
+            </Col>
+          </Row>
         </ProCard>
-        <ProCard className={styles.card} bordered headerBordered title="玫瑰图">
-          <ReactEcharts option={getOption2} style={{ width: '100%', height: '100%' }} />
+        <ProCard title="旭日图" headerBordered>
+          <Row gutter={[8, 8]}>
+            <Col span={8}>
+              <ProCard className={styles.card5} bordered headerBordered title="基础旭日图">
+                <Sunbursts.EchartsBasisSunburst />
+              </ProCard>
+            </Col>
+          </Row>
         </ProCard>
       </ProCard>
     </PageContainer>
