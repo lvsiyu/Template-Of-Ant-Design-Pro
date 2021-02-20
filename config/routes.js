@@ -220,12 +220,17 @@ export default [
               {
                 name: '用户中心',
                 icon: 'UserOutlined',
-                path: '/setting',
+                path: '/personal',
                 routes: [
                   {
+                    name: '个人中心',
+                    path: '/personal/center',
+                    component: './personal/center',
+                  },
+                  {
                     name: '用户设置',
-                    path: '/setting/user',
-                    component: './setting/user',
+                    path: '/personal/user',
+                    component: './personal/user',
                   },
                   {
                     component: './404',

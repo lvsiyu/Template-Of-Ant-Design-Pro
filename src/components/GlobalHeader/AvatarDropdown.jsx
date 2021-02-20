@@ -7,13 +7,11 @@ import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
 const AvatarDropdown = (props) => {
-  const { dispatch } = props;
-
   const {
+    dispatch,
     currentUser: {
       data: { name, avatar },
     },
-    menu,
   } = props;
 
   const onMenuClick = (event) => {
@@ -29,24 +27,20 @@ const AvatarDropdown = (props) => {
       return;
     }
 
-    history.push(`/account/${key}`);
+    history.push(`/personal/${key}`);
   };
 
   const menuHeaderDropdown = (
     <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-      {menu && (
-        <Menu.Item key="center">
-          <UserOutlined />
-          个人中心
-        </Menu.Item>
-      )}
-      {menu && (
-        <Menu.Item key="settings">
-          <SettingOutlined />
-          个人设置
-        </Menu.Item>
-      )}
-      {menu && <Menu.Divider />}
+      <Menu.Item key="center">
+        <UserOutlined />
+        个人中心
+      </Menu.Item>
+      <Menu.Item key="user">
+        <SettingOutlined />
+        个人设置
+      </Menu.Item>
+      <Menu.Divider />
 
       <Menu.Item key="logout">
         <LogoutOutlined />
