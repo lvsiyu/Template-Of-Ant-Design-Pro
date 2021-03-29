@@ -20,6 +20,7 @@ export const isComponentClass = (component) => {
 const checkIsInstantiation = (target) => {
   if (isComponentClass(target)) {
     const Target = target;
+    // eslint-disable-next-line react/display-name
     return (props) => <Target {...props} />;
   }
 

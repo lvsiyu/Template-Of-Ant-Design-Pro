@@ -1,4 +1,5 @@
 import React from 'react';
+import { message } from 'antd';
 import PropTypes from 'prop-types';
 import { Button, Badge, Tooltip } from 'antd';
 import ProTable from '@ant-design/pro-table';
@@ -60,7 +61,7 @@ const TableLeftList = (props) => {
         search: {
           placeholder: '请输入名称查询',
           onSearch: (value) => {
-            alert(value);
+            message.success(value);
           },
         },
         actions: [

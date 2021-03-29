@@ -30,13 +30,11 @@ const BasisList = (props) => {
     }
   }, [dispatch]);
 
-  const confirm = (e) => {
-    console.log(e);
+  const confirm = () => {
     message.success('Click on Yes');
   };
 
-  const cancel = (e) => {
-    console.log(e);
+  const cancel = () => {
     message.success('Click on Yes');
   };
 

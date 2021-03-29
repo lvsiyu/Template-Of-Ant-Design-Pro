@@ -2,6 +2,7 @@ import { SearchOutlined } from '@ant-design/icons';
 import { AutoComplete, Input } from 'antd';
 import useMergeValue from 'use-merge-value';
 import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './index.less';
 
@@ -84,3 +85,14 @@ const HeaderSearch = (props) => {
 };
 
 export default HeaderSearch;
+
+HeaderSearch.propTypes = {
+  className: PropTypes.any,
+  defaultValue: PropTypes.any,
+  onVisibleChange: PropTypes.any,
+  placeholder: PropTypes.any,
+  open: PropTypes.any,
+  defaultOpen: PropTypes.any,
+  value: PropTypes.any,
+  onChange: PropTypes.any,
+};

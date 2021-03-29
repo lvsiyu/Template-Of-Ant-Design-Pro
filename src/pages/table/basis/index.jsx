@@ -25,13 +25,11 @@ const tableDate = (text, record) => (
   </Tooltip>
 );
 
-const confirm = (e) => {
-  console.log(e);
+const confirm = () => {
   message.success('点了是');
 };
 
-const cancel = (e) => {
-  console.log(e);
+const cancel = () => {
   message.error('点了否');
 };
 

@@ -1,4 +1,5 @@
 import { Redirect, Route } from 'umi';
+import PropTypes from 'prop-types';
 import React from 'react';
 import Authorized from './Authorized';
 
@@ -23,3 +24,10 @@ const AuthorizedRoute = ({ component: Component, render, authority, redirectPath
 );
 
 export default AuthorizedRoute;
+
+AuthorizedRoute.propTypes = {
+  component: PropTypes.any,
+  render: PropTypes.any,
+  authority: PropTypes.any,
+  redirectPath: PropTypes.any,
+};

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 import isEqual from 'lodash/isEqual';
 import { isComponentClass } from './Secured'; // eslint-disable-next-line import/no-cycle
@@ -76,3 +77,9 @@ export default class PromiseRender extends React.Component {
     );
   }
 }
+
+PromiseRender.propTypes = {
+  ok: PropTypes.any,
+  error: PropTypes.any,
+  promise: PropTypes.any,
+};

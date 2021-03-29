@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { message } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
 import ProCard from '@ant-design/pro-card';
 import { RightOutlined } from '@ant-design/icons';
@@ -60,7 +61,7 @@ const BasisCard = () => {
         headerBordered
         collapsible
         defaultCollapsed
-        onCollapse={(collapse) => console.log(collapse)}
+        onCollapse={(collapse) => message.success(collapse ? '折叠' : '展开')}
         style={{ marginTop: 20 }}
       >
         内容

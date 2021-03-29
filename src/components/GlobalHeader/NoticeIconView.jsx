@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'umi';
 import { Tag, message } from 'antd';
 import groupBy from 'lodash/groupBy';
@@ -154,3 +155,11 @@ export default connect(({ user, global, loading }) => ({
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
 }))(GlobalHeaderRight);
+
+GlobalHeaderRight.propTypes = {
+  dispatch: PropTypes.any,
+  notices: PropTypes.any,
+  currentUser: PropTypes.any,
+  fetchingNotices: PropTypes.any,
+  onNoticeVisibleChange: PropTypes.any,
+};

@@ -1,4 +1,5 @@
 import { BellOutlined } from '@ant-design/icons';
+import PropTypes from 'prop-types';
 import { Badge, Spin, Tabs } from 'antd';
 import useMergeValue from 'use-merge-value';
 import React from 'react';
@@ -111,3 +112,21 @@ NoticeIcon.defaultProps = {
 };
 NoticeIcon.Tab = NoticeList;
 export default NoticeIcon;
+
+NoticeIcon.propTypes = {
+  dispatch: PropTypes.any,
+  barData: PropTypes.any,
+  children: PropTypes.any,
+  loading: PropTypes.any,
+  onClear: PropTypes.any,
+  onTabChange: PropTypes.any,
+  onItemClick: PropTypes.any,
+  onViewMore: PropTypes.any,
+  clearText: PropTypes.any,
+  viewMoreText: PropTypes.any,
+  className: PropTypes.any,
+  count: PropTypes.any,
+  bell: PropTypes.any,
+  popupVisible: PropTypes.any,
+  onPopupVisibleChange: PropTypes.any,
+};

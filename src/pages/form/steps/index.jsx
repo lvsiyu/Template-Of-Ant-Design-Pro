@@ -20,8 +20,7 @@ const basisFormFooter = (_, dom) => {
 };
 
 const StepsFormPage = (props) => {
-  const { dispatch, step1Status, step2Status, step3Status } = props;
-  console.log(step1Status, step2Status, step3Status);
+  const { dispatch /* step1Status, step2Status, step3Status */ } = props;
 
   const submitFormSuccess = () => {
     message.success('提交成功');

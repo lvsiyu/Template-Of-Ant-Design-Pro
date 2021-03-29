@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Result } from 'antd';
 import check from './CheckPermissions';
 
@@ -19,3 +20,9 @@ const Authorized = ({
 };
 
 export default Authorized;
+
+Authorized.propTypes = {
+  children: PropTypes.any,
+  authority: PropTypes.any,
+  noMatch: PropTypes.any,
+};

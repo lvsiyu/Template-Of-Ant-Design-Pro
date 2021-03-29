@@ -1,5 +1,7 @@
+/* eslint-disable no-nested-ternary */
 import { Avatar, List } from 'antd';
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import styles from './NoticeList.less';
 
@@ -93,3 +95,16 @@ const NoticeList = ({
 };
 
 export default NoticeList;
+
+NoticeList.propTypes = {
+  data: PropTypes.any,
+  onClick: PropTypes.any,
+  onClear: PropTypes.any,
+  title: PropTypes.any,
+  onViewMore: PropTypes.any,
+  emptyText: PropTypes.any,
+  showClear: PropTypes.any,
+  clearText: PropTypes.any,
+  viewMoreText: PropTypes.any,
+  showViewMore: PropTypes.any,
+};
